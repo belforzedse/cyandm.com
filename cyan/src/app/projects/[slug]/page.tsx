@@ -1,7 +1,6 @@
 ﻿"use client";
 
 import Link from "next/link";
-import type { CSSProperties } from "react";
 import { notFound } from "next/navigation";
 import { Breadcrumb } from "../../../components/Breadcrumb";
 import { projects } from "../../../data/global";

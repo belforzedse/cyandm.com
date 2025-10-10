@@ -2,11 +2,18 @@
 
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade, Thumbs } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/thumbs";
+
 import { EmployeeCard } from "../components/EmployeeCard";
 import { ScrollDown } from "../components/ScrollDown";
 import { BottomFire } from "../components/BottomFire";
 import { homePage } from "../data/global";
-import { useEffect, useRef } from "react";
 
 const planets = [
   { title: "خدمات سئو", href: "/seo", className: "red" },
@@ -19,6 +26,7 @@ const starIcons = Array.from({ length: 5 });
 export default function Home() {
   const { hero, projects, testimonials, brands, services, team, posts, faqs } = homePage;
   const clockRef = useRef<HTMLDivElement>(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
   // Clock rotation animation
   useEffect(() => {
@@ -126,22 +134,42 @@ export default function Home() {
               مشاهده همه
             </Link>
           </div>
-          <div className="projects-wrapper swiper">
-            <div className="swiper-wrapper">
-              {projects.map((project) => (
-                <div
-                  key={project.slug}
-                  className="single-project-card swiper-slide"
-                  data-post-id={project.slug}
-                  style={{ "--project-color": project.accentColor } as CSSProperties}
-                >
-                  <div className="image-wrapper">
-                    <img src={project.coverImage} alt={project.title} />
-                  </div>
+          <Swiper
+            className="projects-wrapper"
+            modules={[Autoplay]}
+            slidesPerView={3}
+            centeredSlides
+            spaceBetween={16}
+            speed={800}
+            autoplay={{ delay: 1800 }}
+            breakpoints={{
+              1390: {
+                slidesPerView: 4.2,
+                centeredSlides: false,
+              },
+              1200: {
+                slidesPerView: 3.2,
+                centeredSlides: false,
+              },
+              370: {
+                slidesPerView: 2,
+                centeredSlides: false,
+              },
+            }}
+          >
+            {projects.map((project) => (
+              <SwiperSlide
+                key={project.slug}
+                className="single-project-card"
+                data-post-id={project.slug}
+                style={{ "--project-color": project.accentColor } as CSSProperties}
+              >
+                <div className="image-wrapper">
+                  <img src={project.coverImage} alt={project.title} />
                 </div>
-              ))}
-            </div>
-          </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
           <div className="section-view-all">
             <Link href="/projects" className="primary-btn full-width">
               مشاهده همه
@@ -153,74 +181,101 @@ export default function Home() {
           <div className="section-title">
             <h2 className="h1">نظرات همراهان ما</h2>
           </div>
-          <div className="customer-wrapper swiper">
-            <div className="swiper-wrapper">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="single-customer-card swiper-slide">
-                  <div className="feature-img">
-                    <img src={testimonial.logo} alt={testimonial.author} />
-                  </div>
-                  <div className="content">
-                    <div className="name-wrapper">
-                      <p className="name">{testimonial.author}</p>
-                      <p className="project-name">{testimonial.role}</p>
-                    </div>
-                    <div className="stars-wrapper">
-                      <span className="counter">5 / 5</span>
-                      <div className="stars">
-                        {starIcons.map((_, starIndex) => (
-                          <svg
-                            key={starIndex}
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="15"
-                            viewBox="0 0 16 15"
-                            fill="none"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              d="M4.92463 14.3747C4.54449 14.5731 4.08459 14.5382 3.73879 14.2846C3.39298 14.031 3.22141 13.6029 3.29638 13.1807L3.90313 9.70294L1.34863 7.25494C1.03639 6.95717 0.921956 6.50705 1.05408 6.09631C1.1862 5.68557 1.54159 5.38658 1.96888 5.32669L5.51563 4.81969L7.11688 1.62544C7.30674 1.24236 7.69733 1 8.12488 1C8.55243 1 8.94303 1.24236 9.13288 1.62544L10.7341 4.81969L14.2809 5.32669C14.7082 5.38658 15.0636 5.68557 15.1957 6.09631C15.3278 6.50705 15.2134 6.95717 14.9011 7.25494L12.3466 9.70294L12.9534 13.1814C13.0284 13.6037 12.8568 14.0318 12.511 14.2853C12.1652 14.5389 11.7053 14.5739 11.3251 14.3754L8.12488 12.7217L4.92463 14.3747Z"
-                              fill="#F5BE31"
-                              stroke="#F5BE31"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="desc-wrapper">
-                      <p>{testimonial.quote}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="customer-thumbs swiper">
-            <div className="swiper-wrapper">
-              {testimonials.map((testimonial, index) => (
-                <div key={`thumb-${index}`} className="swiper-slide">
+          <Swiper
+            className="customer-wrapper"
+            modules={[EffectFade, Autoplay, Thumbs]}
+            slidesPerView={1}
+            effect="fade"
+            speed={800}
+            thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+          >
+            {testimonials.map((testimonial, index) => (
+              <SwiperSlide key={index} className="single-customer-card">
+                <div className="feature-img">
                   <img src={testimonial.logo} alt={testimonial.author} />
                 </div>
-              ))}
-            </div>
-          </div>
+                <div className="content">
+                  <div className="name-wrapper">
+                    <p className="name">{testimonial.author}</p>
+                    <p className="project-name">{testimonial.role}</p>
+                  </div>
+                  <div className="stars-wrapper">
+                    <span className="counter">5 / 5</span>
+                    <div className="stars">
+                      {starIcons.map((_, starIndex) => (
+                        <svg
+                          key={starIndex}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="15"
+                          viewBox="0 0 16 15"
+                          fill="none"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M4.92463 14.3747C4.54449 14.5731 4.08459 14.5382 3.73879 14.2846C3.39298 14.031 3.22141 13.6029 3.29638 13.1807L3.90313 9.70294L1.34863 7.25494C1.03639 6.95717 0.921956 6.50705 1.05408 6.09631C1.1862 5.68557 1.54159 5.38658 1.96888 5.32669L5.51563 4.81969L7.11688 1.62544C7.30674 1.24236 7.69733 1 8.12488 1C8.55243 1 8.94303 1.24236 9.13288 1.62544L10.7341 4.81969L14.2809 5.32669C14.7082 5.38658 15.0636 5.68557 15.1957 6.09631C15.3278 6.50705 15.2134 6.95717 14.9011 7.25494L12.3466 9.70294L12.9534 13.1814C13.0284 13.6037 12.8568 14.0318 12.511 14.2853C12.1652 14.5389 11.7053 14.5739 11.3251 14.3754L8.12488 12.7217L4.92463 14.3747Z"
+                            fill="#F5BE31"
+                            stroke="#F5BE31"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="desc-wrapper">
+                    <p>{testimonial.quote}</p>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          <Swiper
+            className="customer-thumbs"
+            modules={[Autoplay]}
+            onSwiper={setThumbsSwiper}
+            slidesPerView={4.2}
+            spaceBetween={16}
+            watchSlidesProgress
+            speed={800}
+          >
+            {testimonials.map((testimonial, index) => (
+              <SwiperSlide key={`thumb-${index}`}>
+                <img src={testimonial.logo} alt={testimonial.author} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </section>
 
         <section className="container brands-con">
           <h2 className="h1">برندهایی که افتخار همکاری باهاشون را داشتیم</h2>
-          <div className="brands-wrapper swiper" id="brandsSwiper">
-            <div className="swiper-wrapper">
-              {brands.map((brand, index) => (
-                <div key={index} className="img-wrapper swiper-slide">
-                  <img src={brand.logo} alt={brand.name} />
-                </div>
-              ))}
-            </div>
-          </div>
+          <Swiper
+            id="brandsSwiper"
+            className="brands-wrapper"
+            modules={[Autoplay]}
+            slidesPerView={3}
+            spaceBetween={24}
+            autoplay
+            breakpoints={{
+              768: {
+                slidesPerView: 5,
+              },
+              1024: {
+                slidesPerView: 7,
+              },
+              1440: {
+                slidesPerView: 9,
+              },
+            }}
+          >
+            {brands.map((brand, index) => (
+              <SwiperSlide key={index} className="img-wrapper">
+                <img src={brand.logo} alt={brand.name} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </section>
 
         <section className="services-con container">
