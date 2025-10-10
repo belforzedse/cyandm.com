@@ -1,19 +1,5 @@
-﻿import Link from "next/link";
-import { contact } from "../data/global";
-
-const servicesMenu = [
-  { label: "طراحی UI", href: "/ui-design" },
-  { label: "بازاریابی", href: "/marketing" },
-  { label: "سئو", href: "/seo" },
-  { label: "کمپین", href: "/landing" },
-];
-
-const blogMenu = [
-  { label: "طراحی", href: "/blog?category=design" },
-  { label: "رشد", href: "/blog?category=growth" },
-  { label: "توسعه", href: "/blog?category=development" },
-  { label: "تحلیل", href: "/blog?category=analytics" },
-];
+import Link from "next/link";
+import { contact, footerContent } from "../data/global";
 
 type SocialIconProps = {
   label: string;
@@ -57,95 +43,73 @@ function SocialIcon({ label }: SocialIconProps) {
   }
 }
 
-function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="flex flex-col gap-4">
-      <h3 className="text-lg font-semibold text-white">{title}</h3>
-      {children}
-    </div>
-  );
-}
-
 export function Footer() {
   const year = new Date().getFullYear();
-  const footerImage = "/wp-assets/imgs/logo.png";
-  const { address, mapEmbed, phoneNumbers, email, socials } = contact;
+  const { servicesMenu, blogMenu } = footerContent;
+  const { address, mapEmbed, phoneNumbers, socials, footerImage } = contact;
 
   return (
-    <footer className="relative border-t border-[color:var(--border)]/40 bg-[color:var(--surface)]/70 py-16">
+    <footer className="footer relative z-40 my-8">
       <div className="container">
-        <div className="grid gap-10 lg:grid-cols-4">
-          <FooterColumn title="خدمات">
-            <ul className="flex flex-col gap-3 text-sm text-[color:var(--text-muted)]">
-              {servicesMenu.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} className="transition hover:text-white">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </FooterColumn>
-
-          <FooterColumn title="دسته‌بندی مقالات">
-            <ul className="flex flex-col gap-3 text-sm text-[color:var(--text-muted)]">
-              {blogMenu.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} className="transition hover:text-white">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </FooterColumn>
-
-          <FooterColumn title="دفتر مرکزی">
-            <p className="text-sm leading-7 text-[color:var(--text-muted)]">{address}</p>
-            <div
-              className="overflow-hidden rounded-3xl border border-[color:var(--border)] bg-black/20 shadow-[0_18px_80px_rgba(10,8,30,0.45)]"
-              dangerouslySetInnerHTML={{ __html: mapEmbed }}
-            />
-          </FooterColumn>
-
-          <FooterColumn title="ارتباط مستقیم">
-            <div className="flex flex-col gap-3 text-sm text-[color:var(--text-muted)]">
-              <a href={`mailto:${email}`} className="transition hover:text-white">
-                {email}
-              </a>
-              <div className="flex flex-col gap-2">
-                {phoneNumbers.map((phone) => (
-                  <a key={phone} href={`tel:${phone}`} className="transition hover:text-white">
-                    {phone}
-                  </a>
-                ))}
+        <div className="columns flex items-start gap-24 relative max-lg:gap-8 max-md:w-full max-md:flex-col">
+          <div className="flex gap-12 justify-between [&_div]:min-w-28 max-md:w-full">
+            <div className="column-1 max-md:w-2/4">
+              <span className="footer-title h4">خدمات</span>
+              <div className="footer-menu">
+                <ul>
+                  {servicesMenu.map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href}>{item.label}</Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-          </FooterColumn>
-        </div>
-
-        <div className="mt-14 flex flex-col gap-6 border-t border-[color:var(--border)]/40 pt-8 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-4">
-            <div className="h-12 w-12 overflow-hidden rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface-muted)]/80">
-              <img src={footerImage} alt="Cyan Digital" className="h-full w-full object-cover" />
+            <div className="column-2 max-md:w-2/4">
+              <span className="footer-title h4">دسته بندی مقالات</span>
+              <div className="footer-menu">
+                <ul>
+                  {blogMenu.map((item) => (
+                    <li key={item.href}>
+                      <Link href={item.href}>{item.label}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <p className="text-xs text-[color:var(--text-muted)]">
-              {year} © تمامی حقوق برای سایان دیجیتال محفوظ است.
-            </p>
           </div>
-          <div className="flex items-center gap-4">
-            {socials.map((social) => (
-              <a
-                key={social.label}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--border)] text-[color:var(--text-muted)] transition hover:text-white"
-              >
-                <SocialIcon label={social.icon} />
-              </a>
-            ))}
+          <div className="column-3 flex max-w-60 flex-col gap-8">
+            <span className="footer-title h4">آدرس</span>
+            <p className="footer-address-text leading-[2.5]">{address}</p>
+            <div
+              className="footer-address-map"
+              dangerouslySetInnerHTML={{ __html: mapEmbed }}
+            />
+          </div>
+          <div className="column-4">
+            <span className="footer-title h4">شماره تماس</span>
+            <div className="footer-phones">
+              {phoneNumbers.map((phone) => (
+                <a key={phone} href={`tel:${phone}`}>
+                  {phone}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
+        <div className="social-media">
+          {socials.map((social) => (
+            <a key={social.label} href={social.url} target="_blank" rel="noopener noreferrer">
+              <SocialIcon label={social.icon} />
+            </a>
+          ))}
+        </div>
+        <p className="footer-meta text-xs text-[color:var(--text-muted)]">
+          {year} © تمامی حقوق برای سایان دیجیتال محفوظ است.
+        </p>
+      </div>
+      <div className="footer-image absolute left-0 bottom-0 z-[-2] h-[50vh] max-lg:relative max-lg:max-h-[300px] max-md:max-h-[200px]">
+        <img src={footerImage} alt="تصویر پس‌زمینه فوتر" />
       </div>
     </footer>
   );

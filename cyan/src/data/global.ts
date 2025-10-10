@@ -1,5 +1,6 @@
-﻿import type {
+import type {
   ContactDetails,
+  FooterContent,
   HomePageContent,
   NavigationItem,
   Project,
@@ -341,6 +342,21 @@ export const teamMembers: TeamMember[] = [
   },
 ];
 
+export const footerContent: FooterContent = {
+  servicesMenu: [
+    { label: "طراحی UI", href: "/ui-design" },
+    { label: "بازاریابی", href: "/marketing" },
+    { label: "سئو", href: "/seo" },
+    { label: "کمپین", href: "/landing" },
+  ],
+  blogMenu: [
+    { label: "طراحی", href: "/blog?category=design" },
+    { label: "رشد", href: "/blog?category=growth" },
+    { label: "توسعه", href: "/blog?category=development" },
+    { label: "تحلیل", href: "/blog?category=analytics" },
+  ],
+};
+
 export const contact: ContactDetails = {
   address: "تهران، خیابان ولیعصر، پلاک ۱۲۰، واحد ۷",
   mapEmbed:
@@ -352,6 +368,7 @@ export const contact: ContactDetails = {
     { label: "لینکدین", url: "https://linkedin.com/company/cyandm", icon: "linkedin" },
     { label: "تلگرام", url: "https://t.me/cyandm", icon: "telegram" },
   ],
+  footerImage: "/wp-assets/imgs/puzzle-image.png",
 };
 
 export const homePage: HomePageContent = {
