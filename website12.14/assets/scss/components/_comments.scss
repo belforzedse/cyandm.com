@@ -1,0 +1,26 @@
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 0s 600000s, color 0s 600000s !important;
+}
+
+.comments__list__wrapper {
+  scrollbar-width: none;
+  // scrollbar-color: var(--secondary) var(--primary);
+}
+#overlay{
+//   opacity: 0;
+//   &.active{
+//     opacity: 1;
+//   }
+transition: all 0.5s ease-in-out;
+}
+#comment_back{
+  width: 40%;
+  height: 100vh;
+}
+ .toastify{
+  z-index: 5555;
+  position: absolute;
+  width: 100%;
+  padding: 20px;
+  }

@@ -1,0 +1,65 @@
+@use "../../utils/_index" as *;
+
+.faq-card {
+  padding: 1rem;
+  margin-block: 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 1rem;
+
+  &__title {
+    &-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      i {
+        font-size: 2rem;
+        transform: rotate(90deg);
+        transition: transform 0.3s ease-in-out;
+      }
+    }
+  }
+
+  &__content {
+    &-wrapper {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid 0.3s ease-in-out;
+
+      > div {
+        overflow: hidden;
+      }
+    }
+  }
+
+  &:hover {
+    border-color: var(--start-color, #{$gradient_blue_start});
+
+    .faq-card {
+      &__title {
+        &-wrapper {
+          i {
+            transform: rotate(0deg);
+            color: var(--start-color, #{$gradient_blue_start});
+          }
+        }
+      }
+
+      &__content {
+        &-wrapper {
+          grid-template-rows: 1fr;
+        }
+      }
+    }
+  }
+  &.close {
+    .faq-card__content-wrapper {
+      grid-template-rows: 0fr;
+    }
+  }
+    &.open {
+    .faq-card__content-wrapper {
+      grid-template-rows: 1fr;
+    }
+  }
+}

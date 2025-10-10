@@ -1,0 +1,22 @@
+@use '../utils/_index' as *;
+
+.page-404 {
+	@include d_flex(column, center, center, $gap: 1rem);
+	height: $full_height;
+
+	&-image {
+		img {
+			max-width: 600px;
+		}
+	}
+
+	&-content {
+		@include d_flex(column, center, center, $gap: 1rem);
+		text-align: center;
+	}
+
+	@include mq('md') {
+		height: unset;
+		margin-block: 2rem;
+	}
+}

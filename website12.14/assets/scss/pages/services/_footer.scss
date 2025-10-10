@@ -1,0 +1,15 @@
+@use '../../utils/_index' as *;
+
+.service-footer {
+	@include d_flex(row, center, $gap: 0.5rem);
+
+	position: fixed;
+	bottom: 1rem;
+	width: 100%;
+	transform: translateY(200%);
+	transition: opacity 0.8s ease-in-out;
+
+	&.show {
+		transform: translateY(0);
+	}
+}

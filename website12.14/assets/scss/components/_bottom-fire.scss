@@ -1,0 +1,61 @@
+@use '../utils/_index' as *;
+
+.bottom-fire {
+	min-height: PxToRem(200);
+	width: 100%;
+	position: fixed;
+	bottom: -6.5rem;
+	animation: bottom_fire_container 10s ease-in-out infinite alternate;
+	z-index:444444;
+	transition: opacity 0.3s ease;
+	opacity: 1;
+
+	@include mq('md') {
+		bottom: -1rem;
+	}
+
+	.circle {
+		--width: 240px;
+		--left: 120px;
+		--top: 0;
+
+		//hsla
+		--hue: 240;
+		--saturate: 72%;
+		--lightness: 64%;
+		--alpha: 1;
+
+		width: var(--width);
+		top: var(--top);
+		left: var(--left);
+
+		aspect-ratio: 1;
+		border-radius: 50%;
+		position: absolute;
+		filter: blur(100px);
+
+		background-color: hsla(
+			var(--hue),
+			var(--saturate),
+			var(--lightness),
+			var(--alpha)
+		);
+
+		animation: bottom_fire_circle 1s ease-in-out infinite alternate;
+
+		@for $c from 1 to 20 {
+			&:nth-child(#{$c}) {
+				animation-delay: calc($c * 0.3s);
+			}
+		}
+	}
+}
+
+body[data-scrolled='true'] {
+	.bottom-fire {
+		opacity: 0;
+		height:10px;
+		min-height: 0;
+		// display: none;
+	}
+}

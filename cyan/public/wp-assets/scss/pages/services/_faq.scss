@@ -1,0 +1,18 @@
+@use '../../utils/_index' as *;
+
+.service-faq {
+
+	.container {
+		@include d_flex($equal_children: true, $gap: 2rem);
+		.faq-content{
+				padding-block-start: 3rem;
+				height: 70vh;
+				overflow: auto;
+
+		}
+
+		@include mq('md') {
+			flex-direction: column-reverse;
+		}
+	}
+}

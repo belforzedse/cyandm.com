@@ -1,0 +1,266 @@
+@use "../utils/_index" as *;
+.archive-project {
+  section {
+    position: relative;
+
+    img {
+      width: 50%;
+    }
+  }
+  ul.cat{
+    white-space: nowrap;
+          @include mq("lg") {
+width: 90%;
+          }
+  }
+  .bubble- {
+    &red {
+      top: 10%;
+      left: 20%;
+    }
+    &orange {
+      top: 5vh;
+      right: 28%;
+      @include mq("md") {
+        top: 28vh;
+        right: 24%;
+      }
+    }
+    &orange-2 {
+      top: 30vh;
+      left: 20%;
+      @include mq("md") {
+        top: 20vh;
+        left: 10%;
+      }
+    }
+    &blue {
+      top: 10vh;
+      right: 10%;
+      @include mq("md") {
+        top: 4vh;
+      }
+    }
+    &grey {
+      top: 15vh;
+      left: 22%;
+      @include mq("md") {
+        top: 26vh;
+        left: 16%;
+      }
+    }
+    &grey-2 {
+      top: 40vh;
+      right: 15%;
+      @include mq("md") {
+        top: 15vh;
+        right: 0%;
+      }
+    }
+    &green {
+      top: 25vh;
+      left: 20%;
+      @include mq("md") {
+        top: 24vh;
+        left: 0%;
+      }
+    }
+    &pink {
+      top: 30vh;
+      right: 22%;
+      @include mq("md") {
+        top: 26vh;
+        right: 0%;
+      }
+    }
+    &blue-2 {
+      top: 55vh;
+      left: 20%;
+      @include mq("md") {
+        top: 22vh;
+        left: 60%;
+      }
+    }
+    &red-2 {
+      top: 60vh;
+      right: 8%;
+      @include mq("md") {
+        top: 25vh;
+      }
+    }
+  }
+  .projects {
+    .project-card {
+      box-shadow: inset 751px 0px 353px 153px black;
+      &:nth-child(odd) {
+        flex-direction: row-reverse;
+        box-shadow: inset -751px 0px 353px 153px black;
+          @include mq("md") {
+flex-direction: column;      }
+      }
+    }
+  }
+}
+
+.cat- {
+  &seo {
+    background: #16b6fb 30%;
+  }
+  &design {
+    background: rgba(255, 215, 5, 0.3);
+  }
+
+  &getpic {
+    background: rgba(255, 72, 148, 0.3);
+  }
+  &logo {
+    background: rgba(5, 255, 105, 0.3);
+  }
+  &branding {
+    background: rgba(175, 56, 106, 0.3);
+  }
+}
+.single-project-button {
+  position: fixed;
+  bottom: 82px;
+  left: 56px;
+  i{
+    font-size: 32px;
+  }
+  .open-button {
+    background: #000;
+    opacity: 0.9;
+    width: 64px;
+    // box-shadow: 0 0 26px 10px #fff;
+    animation: blink 1s linear infinite;
+    border-radius: 50%;
+    height: 64px;
+
+    &::before {
+      content: "";
+      border: 10px solid rgba(255, 255, 255, 0.24);
+      width:80px;
+      border-radius: 50%;
+
+      height: 80px;
+      position: absolute;
+    }
+  &::after {
+      content: "";
+      border: 12px solid rgba(255, 255, 255, 0.14);
+      width: 95px;
+      border-radius: 50%;
+
+      height: 95px;
+      position: absolute;
+    }
+    i {
+      font-size: 34px;
+    }
+  }
+  .project-button {
+      visibility: hidden;
+    opacity: 0;
+    transition: all 0.8s ease-in-out;
+
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+          opacity: 0.9;
+
+      border-radius: 50%;
+      width: 64px;
+      height: 64px;
+    }
+    &.active {
+      height: auto;
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  .icon-arrowright {
+     transform: rotate(180deg);
+}
+  @include mq("md") {
+        left: 50%;
+      }
+}
+
+//  @keyframes blink {
+
+//             0%,
+//             100% {
+//               box-shadow: 0 0 0px 10pxrgba(255, 255, 255, 0.84);
+
+//             }
+
+//             50% {
+//                             box-shadow: 0 0 0px 15px rgba(255, 255, 255, 0.6);
+
+//             }
+//         }
+
+// @keyframes blink {
+//   0% {
+//     transform:scale3d(1,1,1);
+//     opacity: 0.8;
+//   }
+//   100% {
+//     transform:scale3d(1.1,1.3,1.1);
+//     opacity:0;
+//   }
+// }
+
+// body {
+//   height:100vh;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   background: #222f3e;
+// }
+
+.main-button {
+  z-index: 111111111111;
+  background-color: #000000;
+  border: 1px solid #000;
+  padding: 10px 35px;
+  font-size: 20px;
+  font-family: "Open Sans";
+  border-radius: 3px;
+  cursor: pointer;
+  color: #222f3e;
+  top: 10%;
+  right: 20%;
+  position: absolute;
+  text-transform: uppercase;
+  &:after {
+    border-color: #ffffff;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    border-radius: 3px;
+    animation-name: blink;
+    animation-duration: 1.3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    // animation-timing-function: cubic-bezier(1, 0, 0, 1);
+    animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+}
+
+// @keyframes blink {
+//   0% {
+//     transform:scale3d(1,1,1);
+//     opacity: 0.8;
+//   }
+//   100% {
+//     transform:scale3d(1.1,1.3,1.1);
+//     opacity:0;
+//   }
+// }

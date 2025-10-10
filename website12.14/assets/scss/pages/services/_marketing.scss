@@ -1,0 +1,28 @@
+@use '../../utils/_index' as *;
+
+.marketing {
+	&-slide-0 {
+		@include mq('md') {
+			height: 100vh;
+		}
+		.container {
+			height: 100%;
+		}
+		&-content {
+			@include d_flex(column, center, center);
+			height: 100%;
+
+			.t1 {
+				text-align: center;
+
+				@include mq('md') {
+					font-size: 2rem;
+				}
+			}
+		}
+
+		.scroll-down {
+			@include d_flex(column, center, center);
+		}
+	}
+}

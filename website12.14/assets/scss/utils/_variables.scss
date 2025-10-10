@@ -1,0 +1,30 @@
+//Color
+$black_1: hsla(227, 44%, 6%, 1);
+$black_2:  #090C17;
+$white_1:#E0E0E0;
+$white_2: hsla(194, 100%, 96%, 1);
+$gray_1: hsla(0, 0%, 46%, 1);
+$gray_2: #A6B2B9;
+
+$gradient_white:#191B26;
+$gradient_white_2: linear-gradient(
+	100.06deg,rgba(255, 255, 255, 0.06) , rgba(255, 255, 255, 0.07));
+
+$cyan:#3DE2F2;
+
+//Gradients
+$gradient_blue_start: #1dbacf;
+$gradient_blue_end: #0d8bff;
+
+$gradient_blue_1: linear-gradient(
+	100.06deg,
+	$gradient_blue_start 23.34%,
+	$gradient_blue_end 124.17%
+);
+
+$cyan_1: linear-gradient(103.44deg, #15eded 12.12%, #04b2e9 130.32%);
+$cyan_2: linear-gradient(hsla(191, 99%, 58%, 1), hsla(227, 44%, 6%, 0) 70%);
+
+$full_height: calc(
+	100vh - (var(--header-height) + var(--footer-height) + 4rem)
+); //4rem is footer margins

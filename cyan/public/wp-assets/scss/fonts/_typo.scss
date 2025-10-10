@@ -1,0 +1,49 @@
+@use '../utils/_index' as *;
+
+body {
+	@include font_style('body_1');
+
+	@include mq('md') {
+		@include font_style('body_2');
+	}
+}
+
+h1,
+.h1 {
+	@include font_style('h1');
+
+	@include mq('sm') {
+		@include font_style('h2');
+	}
+}
+
+h2,
+.h2 {
+	@include font_style('h2');
+}
+
+h3,
+.h3 {
+	@include font_style('h3');
+
+	@include mq('md') {
+		@include font_style('h4');
+	}
+}
+
+h4,
+.h4 {
+	@include font_style('h4');
+}
+
+.body-2 {
+	@include font_style('body_2');
+}
+
+.t1 {
+	@include font_style('t1');
+}
+
+.t2 {
+	@include font_style('t2');
+}

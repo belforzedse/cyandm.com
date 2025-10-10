@@ -1,0 +1,47 @@
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+ul {
+	list-style: none;
+}
+
+img {
+	width: 100%;
+	height: auto;
+	border-radius: inherit;
+}
+
+a {
+	text-decoration: none;
+	color: unset;
+}
+
+i {
+	aspect-ratio: 1;
+	display: inline-block;
+}
+
+// //for admins
+// html {
+// 	--wp-admin--admin-bar--height: 0px;
+// 	margin-top: 0 !important;
+// }
+
+// #wpadminbar {
+
+// 	display: none !important;
+// }
+
+/*****Developer Mode*********/
+i.not-correct {
+	background-color: red;
+}
+.transition8{
+	    // transition: all 0.8s ease-in-out;
+
+}

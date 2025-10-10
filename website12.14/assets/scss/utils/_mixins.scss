@@ -1,0 +1,207 @@
+@use './functions' as *;
+@use './variables' as *;
+
+@mixin d_flex(
+	$dir: row,
+	$j_c: start,
+	$a_i: start,
+	$wrap: nowrap,
+	$equal_children: false,
+	$gap: 0
+) {
+	display: flex;
+	flex-direction: $dir;
+	justify-content: $j_c;
+	align-items: $a_i;
+	flex-wrap: $wrap;
+	gap: $gap;
+
+	@if ($equal_children) {
+		> * {
+			flex: 1;
+		}
+	}
+}
+
+@mixin psudo(
+	$el: after,
+	$content: '',
+	$inset: 0 0 auto auto,
+	$square: PxToRem(4),
+	$display: block,
+	$position: absolute
+) {
+	position: relative;
+	isolation: isolate;
+
+	&::#{$el} {
+		content: $content;
+		position: $position;
+		inset: $inset;
+		width: $square;
+		height: $square;
+		display: $display;
+		background: inherit;
+		border-radius: inherit;
+		border: inherit;
+		@content;
+	}
+}
+
+@mixin base_font() {
+	font-family: 'peyda';
+ 	font-style: normal;
+ 	font-variant-ligatures: discretionary-ligatures;
+	font-feature-settings: 'ss01' 1, 'salt' 0;
+	letter-spacing:0.5px;
+	@content;
+}
+
+@mixin font_style($type) {
+	@include base_font();
+	@if ($type == 't1') {
+		font-size: PxToRem(80);
+				line-height: PxToRem(104);
+
+		font-weight: bold;
+	}
+	@if ($type == 't2') {
+		font-size: PxToRem(64);
+		font-weight: bold;
+		line-height: PxToRem(104);
+	}
+	@if ($type == 'h1') {
+		font-size: PxToRem(36);
+		font-weight: 700;
+	}
+	@if ($type == 'h2') {
+		font-size: PxToRem(24);
+		line-height: PxToRem(36);
+		font-weight: bold;
+	}
+	@if ($type == 'h3') {
+		font-size: PxToRem(20);
+		font-weight: 700;
+	}
+	@if ($type == 'h4') {
+		font-size: PxToRem(16);
+		font-weight: 700;
+	}
+	@if ($type == 'body_1') {
+		font-size: PxToRem(16);
+		font-weight: 400;
+		line-height: PxToRem(36);
+	}
+	@if ($type == 'body_2') {
+		font-size: PxToRem(16);
+		font-weight: 400;
+		line-height: PxToRem(32);
+	}
+	@if ($type == 'caption') {
+		font-size: PxToRem(12);
+		font-weight: 400;
+		line-height: 14px;
+	}
+}
+
+@mixin make_icon($content) {
+	&::after {
+		content: $content;
+		font-family: 'cyan-icon' !important;
+		speak-as: never;
+		font-style: normal;
+		font-weight: normal;
+		font-variant: normal;
+		text-transform: none;
+		line-height: 1;
+
+		/* Better Font Rendering =========== */
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+
+		@content;
+	}
+}
+@mixin make_icon_before($content) {
+	&::before {
+		content: $content;
+		font-family: 'cyan-icon' !important;
+		speak-as: never;
+		font-style: normal;
+		font-weight: normal;
+		font-variant: normal;
+		text-transform: none;
+		line-height: 1;
+
+		/* Better Font Rendering =========== */
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+
+		@content;
+	}
+}
+@mixin base_btn(
+	$color: inherit,
+	$color_hover: $black_1,
+	$border_color: $gradient_blue_start,
+	$psudo_bg_color: $gradient_blue_1,
+	$font_style: 'body_2',
+	$full_round: true
+) {
+	@if ($full_round) {
+		border-radius: PxToRem(1000);
+	}
+	border: 1px solid $border_color;
+	background: transparent;
+	overflow: hidden;
+	display: inline-block;
+	position: relative;
+	transition: color 0.3s ease-in-out;
+	color: $color;
+	cursor: pointer;
+	@include font_style($font_style);
+
+	@include psudo($inset: 0, $square: 100%) {
+		background: $psudo_bg_color;
+		z-index: -1;
+		transition: translate 0.3s ease-in-out;
+		translate: 0 100%;
+		border: none;
+		border-radius: 0;
+	}
+
+	&:hover,
+	&[data-active='true'] {
+		color: $color_hover;
+		&::after {
+			translate: 0;
+		}
+	}
+}
+
+@mixin d_grid($col, $row, $gap) {
+	display: grid;
+	grid-template-columns: repeat($col, 1fr);
+	grid-template-rows: repeat($row, 1fr);
+	gap: $gap;
+	@content;
+}
+
+@mixin mq($viewport: 'xs', $type: screen) {
+	$window_width: map-get(
+		(
+			'xs': 320px,
+			'sm': 480px,
+			'md': 768px,
+			'lg': 992px,
+			'xl': 1280px,
+						'xxl': 1550px,
+
+		),
+		$viewport
+	);
+
+	@media #{$type} and (max-width: #{$window_width}) {
+		@content;
+	}
+}

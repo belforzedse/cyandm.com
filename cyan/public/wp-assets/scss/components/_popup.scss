@@ -1,0 +1,33 @@
+@use '../utils/_index' as *;
+
+.pop-up {
+  display: block;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.3s ease;
+  width: 100vw;
+  height: 100vh;
+  inset: 0;
+  background-color: rgba(#090c17, 0.3);
+  backdrop-filter: blur(240px);
+  z-index: 1000;
+  position: fixed;
+  isolation: isolate;
+
+  &.open {
+    pointer-events: all;
+    opacity: 1;
+  }
+
+  @at-root {
+    html:has(.pop-up.open) {
+      overflow: hidden;
+    }
+  }
+
+  .content {
+    @include d_flex(column, center, center);
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -1,0 +1,46 @@
+@use '../utils/_index' as *;
+
+.post-sidebar {
+	max-width: 300px;
+	@include mq('md') {
+		display: none;
+	}
+
+	.h2 {
+		display: inline-block;
+		margin-block-end: 1rem;
+
+		&:not(:first-child) {
+			margin-block-start: 1rem;
+		}
+	}
+
+	&-categories {
+		display: grid;
+		gap: 0.75rem;
+		.category {
+			&-wrapper {
+				@include d_flex(row, flex-start, center, $gap: 0.75rem);
+				border: 1px solid $white_1;
+				border-radius: 100vmax;
+			}
+
+			&-image {
+				display: flex;
+
+				img {
+					width: 100px;
+					height: 50px;
+					object-fit: cover;
+					border-radius: 100vmax;
+				}
+			}
+		}
+	}
+
+	&-recommended {
+		display: grid;
+		grid-template-rows: repeat(3, 1fr);
+		gap: 0.75rem;
+	}
+}

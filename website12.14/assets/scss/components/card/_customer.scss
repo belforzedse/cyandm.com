@@ -1,0 +1,88 @@
+@use '../../utils/_index' as *;
+
+.single-customer-card {
+	display: flex !important;
+	@include d_flex($gap: PxToRem(20), $equal_children: true);
+
+
+
+	.feature-img,
+	.feature-video {
+		max-inline-size: var(--image-width, 40%);
+		max-block-size: PxToRem(532);
+		border-radius: PxToRem(32);
+		overflow: hidden;
+		img {
+			max-height: 100%;
+			aspect-ratio: 6/8;
+			object-fit: cover;
+		}		
+		@include mq('md') {
+			max-inline-size: 100%;
+			inline-size: calc(100% - 2 * var(--margin-from-side));
+			//max-block-size: 20rem;
+		}
+	}
+
+	.feature-video {
+		height: var(--customer-con-height);
+
+		video {
+			max-height: var(--customer-con-height);
+		}
+					@include mq('lg') {
+						height: 400px;
+					}
+	}
+
+	.content {
+		@include d_flex(column, $gap: PxToRem(16));
+		padding-block: PxToRem(12);
+		margin-inline-end: var(--margin-from-side);
+
+	
+
+		.name-wrapper {
+			@include d_flex(column, $gap: PxToRem(8));
+			.name {
+				@include font_style('h3');
+			}
+
+			.project-name {
+				@include font_style('h4');
+				color: $gray_1;
+			}
+		}
+
+		.stars-wrapper {
+			@include d_flex(row, center, center, $gap: PxToRem(4));
+
+			> * {
+				height: 100%;
+			}
+
+			.stars {
+				@include d_flex(row-reverse, $gap: 2px);
+			}
+
+			.counter {
+				@include d_flex(row, center, center);
+				display: block;
+				line-height: 0;
+				translate: 0 2px; //fix font issue
+				color: $gray_1;
+				font-weight: bold;
+			}
+		}
+
+		.clear-fix {
+			height: var(--customer-thumbs-height);
+		}
+			@include mq('md') {
+			margin-inline: 0;
+			inline-size: calc(100% - 2 * var(--margin-from-side));
+		}
+	}
+		@include mq('md') {
+display: block !important;	}
+}

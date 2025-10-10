@@ -1,0 +1,70 @@
+@use "../utils/_index" as *;
+.search-div {
+  border: 1px solid #ffffff0f;
+  border-radius: 40px;
+  color: #ffffff08;
+  transition: all 0.8s ease-in-out;
+  width: 20%;
+  &:focus,
+  &:active,
+  &:hover {
+    border-color: #ffffff57;
+  }
+  i::before {
+    color: #a6b2b9;
+  }
+  input {
+    background: transparent;
+    border: 0 !important;
+
+    &:focus-visible {
+      outline: 0;
+      border: 0;
+    }
+    &::placeholder {
+      color: #a6b2b9;
+    }
+  }
+}
+main.search-page{
+          min-height: 40vh;
+
+    section{
+    transition: all 0.3s ease-in-out;
+  } 
+
+ 
+  .search-bread {
+    border: 1px solid rgba(251, 251, 251, 0.16);
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.04);
+
+    a {
+      color: $gray_1;
+    }
+  }
+ 
+  .result {
+    &.deactive {
+      height: 0;
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+  .search-result {
+    margin-block-start: 1rem !important;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    &.active {
+      height: auto;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+input:-webkit-autofill, input:-webkit-autofill:focus {
+    transition: background-color 0s 600000s, color 0s 600000s !important;
+}
+input {
+  -webkit-text-fill-color: #fff;
+}

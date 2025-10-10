@@ -1,0 +1,43 @@
+@use '../../utils/_index' as *;
+
+main.seo {
+	.seo-slide-0 {
+		height: calc(100vh - var(--header-height));
+		.container {
+			height: 100%;
+		}
+		&-wrapper {
+			@include d_flex(row, center, center, $equal_children: true);
+			height: 100%;
+
+			@include mq('md') {
+				flex-direction: column;
+				padding-block-start: 6rem;
+			}
+		}
+
+		&-img {
+			max-width: 100%;
+
+			> * {
+				max-width: 100%;
+				@include mq('md') {
+					max-height: 250px;
+				}
+			}
+		}
+
+		&-content {
+			@include mq('md') {
+				@include d_flex(row, center, center);
+				text-align: center;
+				.t1 {
+					@include font_style('h1');
+				}
+				.scroll-down {
+					@include d_flex(column, center, center);
+				}
+			}
+		}
+	}
+}

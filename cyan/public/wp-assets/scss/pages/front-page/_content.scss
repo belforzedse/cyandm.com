@@ -1,0 +1,275 @@
+@use '../../utils/_index' as *;
+
+section.projects-con {
+	> *:nth-child(1) {
+		-webkit-margin-after: PxToRem(20);
+		margin-block-end: PxToRem(20);
+	}
+
+	.swiper-wrapper {
+		transform: translate3d(calc(-1 * var(--margin-from-side)), 0, 0);
+		margin-block-end: 2rem;
+	}
+}
+
+section.customer-con {
+	--image-width: 30%;
+
+	width: 100%;
+	position: relative;
+
+	h2 {
+		width: 100%;
+	}
+
+	.customer-wrapper {
+		width: 100%;
+
+		.swiper-slide {
+			transition: 0.3s;
+
+			&:not(.swiper-slide-active) {
+				opacity: 0 !important;
+				pointer-events: none;
+			}
+		}
+	}
+
+	.customer-thumbs {
+		--gap: #{PxToRem(16)};
+
+		position: absolute;
+		bottom: 0;
+		width: calc(
+			(100% - var(--image-width)) + var(--margin-from-side) - var(--gap)
+		);
+		right: calc(var(--image-width) + var(--gap));
+		padding-inline-end: var(--gap);
+
+		img {
+			aspect-ratio: 1;
+			-o-object-fit: cover;
+			object-fit: cover;
+			border-radius: PxToRem(24);
+		}
+
+		.swiper-slide {
+			transition: opacity 0.3s;
+			&:not(.swiper-slide-thumb-active) {
+				opacity: 0.5;
+				cursor: pointer;
+			}
+		}
+
+		@include mq('md') {
+			width: 100%;
+			right: 0;
+			position: relative;
+
+			img {
+				border-radius: 0.5rem;
+			}
+		}
+	}
+}
+
+section.brands-con {
+	.h1 {
+		margin-block-end: 1rem;
+	}
+}
+
+section.services-con {
+	.services-wrapper {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: repeat(10, 1fr);
+		gap: PxToRem(16);
+
+		%base-card {
+			@include d_flex(column, center, center);
+
+			background: linear-gradient(
+				180deg,
+				rgba(255, 255, 255, 0.02) 0%,
+				rgba(255, 255, 255, 0.03) 100%
+			);
+			border-radius: PxToRem(32);
+			border: 1px solid transparent;
+			overflow: hidden;
+			padding: PxToRem(24);
+			position: relative;
+			transition: border-color 0.3s ease;
+		}
+
+		.single-service-card {
+			@extend %base-card;
+			transition: border-color 0.8s;
+
+			> * {
+				pointer-events: none;
+			}
+
+			.ball {
+				aspect-ratio: 1;
+				background: linear-gradient(
+					180deg,
+					var(--ball-first-color, #00fff0) 0%,
+					var(--ball-second-color, #0b8aff) 100%
+				);
+				border: 1px solid saddlebrown;
+				border-radius: 50%;
+				display: block;
+				-webkit-filter: blur(PxToRem(24));
+				filter: blur(PxToRem(24));
+				left: var(--left, 0);
+				opacity: 0;
+				position: absolute;
+				transition: opacity 0.3s;
+				translate: -50% -50%;
+				top: var(--top, 0);
+				width: PxToRem(120);
+				z-index: -1;
+			}
+
+			.img-wrapper {
+				width: PxToRem(240);
+				height: PxToRem(200);
+				-webkit-margin-after: PxToRem(16);
+				margin-block-end: PxToRem(16);
+
+				img {
+					max-height: 100%;
+					max-width: 100%;
+					-o-object-fit: contain;
+					object-fit: contain;
+				}
+
+				@include mq('xl') {
+					width: PxToRem(120);
+					height: PxToRem(100);
+				}
+			}
+
+			.h3 {
+				-webkit-margin-before: PxToRem(8);
+				margin-block-start: PxToRem(8);
+				opacity: 0.4;
+				display: block;
+
+				@include mq('md') {
+					display: none;
+				}
+			}
+
+			.h2 {
+				@include mq('md') {
+					@include font_style('body_2');
+				}
+			}
+
+			&:nth-child(3n-1) {
+				grid-column: 2 span;
+			}
+
+			&:nth-child(3n + 1) {
+				grid-row: 4 span;
+			}
+
+			&:nth-child(3n + 2),
+			&:nth-child(3n) {
+				grid-row: 5 span;
+			}
+
+			&:hover {
+				border-color: var(--ball-first-color, #1dbacf);
+				.ball {
+					opacity: 1;
+				}
+			}
+		}
+
+		.all-service {
+			@extend %base-card;
+			@include font_style('h2');
+			grid-row: 2 span;
+			color: #3de2f2;
+
+			@include mq('md') {
+				display: none;
+			}
+		}
+
+		@include mq('md') {
+			display: flex;
+			flex-wrap: wrap;
+
+			> * {
+				flex-basis: 45%;
+			}
+		}
+	}
+}
+
+section.team-con {
+	margin-block: 2rem;
+	.profile-wrapper {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		min-width: 100%;
+@include mq('lg') {
+		 		grid-template-columns: repeat(2, 1fr);
+
+		}
+		@include mq('sm') {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+}
+
+section.blog-con {
+	.content {
+		display: flex;
+		gap: 1rem;
+		margin-block: 2rem;
+
+		> * {
+			flex: 1;
+			transition: 0.3s;
+
+			&:hover {
+				flex: 2;
+			}
+		}
+
+		@include mq('lg') {
+			flex-direction: column;
+		}
+	}
+}
+
+section.faq-con {
+	.faq {
+		&-content {
+			display: flex;
+			flex-direction: row;
+
+			> *:nth-child(1) {
+				flex: 2;
+			}
+
+			@include mq('md') {
+				flex-direction: column-reverse;
+				justify-content: center;
+				align-items: center;
+			}
+		}
+
+		&-image {
+			@include mq('md') {
+				max-width: max(50%, 200px);
+			}
+		}
+	}
+}

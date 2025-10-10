@@ -1,0 +1,11 @@
+@function PxToRem($px) {
+  @if ($px > 0) {
+    @if ($px % 4 == 0) {
+      @return calc($px / 16) + rem;
+    }
+  } @else {
+    @if (calc($px * -1) % 4 == 0) {
+      @return calc($px / 16) + rem;
+    }
+  }
+}

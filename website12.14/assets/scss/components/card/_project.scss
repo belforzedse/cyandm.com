@@ -1,0 +1,130 @@
+@use "../../utils/_index" as *;
+
+.single-project-card {
+  padding: PxToRem(76) PxToRem(40);
+  border-radius: PxToRem(12);
+  background: $black_1;
+  box-shadow: inset 0 0 64px 32px var(--project-color);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.88s ease-in-out !important;
+  &:hover {
+    background: var(--project-color);
+    box-shadow: inset 0 0 70px 48px $black_1;
+    opacity: 0.8;
+    // background: red;
+    filter: drop-shadow(0 0 45px $black_1);
+    transform: scale(1.2);
+    backdrop-filter: opacity(0.5);
+    transition: all 0.88s ease-in-out !important;
+
+    // clip-path: circle(50%);
+    img {
+      transform: scale(1.2);
+      transition: all 0.88s ease-in-out !important;
+    }
+  }
+
+  img {
+    transition: all 0.88s ease-in-out !important;
+    height: PxToRem(200);
+    object-fit: cover;
+    border-radius: PxToRem(8);
+  }
+
+  @include mq("md") {
+    padding: 1rem 2rem;
+
+    .image-wrapper {
+      display: flex;
+
+      img {
+        height: 140px;
+      }
+    }
+  }
+}
+.text-area-acf {
+  line-height: 4 !important;
+}
+.project-on-hover {
+  @include d_flex();
+  flex-direction: column;
+  max-width: PxToRem(600);
+  background: #090c17;
+  border: 1px solid #1dbacf;
+  border-radius: PxToRem(32);
+  position: relative;
+  @include psudo(after, "", 0, 100%) {
+    z-index: -1;
+  }
+
+  .head {
+    @include d_flex(row, space-between);
+    padding: PxToRem(32);
+    padding-bottom: 0;
+    width: 100%;
+    .left-col {
+      @include d_flex($gap: PxToRem(8));
+      // max-width: PxToRem(248);
+      a {
+        background-color: var(--taxonomy-color);
+         border-radius: PxToRem(8);
+      }
+    }
+  }
+
+  .project-content {
+    @include d_flex(column, center, center, $gap: PxToRem(24));
+    width: 100%;
+    padding: PxToRem(32);
+    .img-con {
+      @include d_flex();
+      border-radius: PxToRem(12);
+      overflow: hidden;
+      width: 80%;
+      aspect-ratio: 3/2;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  .gallery {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    z-index: -1;
+
+    .img-wrapper {
+      --num: 1;
+      position: absolute;
+      bottom: 59%;
+      left: 50%;
+      translate: 42%;
+      transform-origin: -50% 50%;
+      scale: 1.5;
+      scale: 0;
+      rotate: 0;
+      transition: scale 0.3s, rotate 1s;
+
+      @for $i from 1 to 5 {
+        &:nth-child(#{$i}) {
+          --num: #{$i};
+        }
+      }
+    }
+  }
+
+  &:hover {
+    .gallery {
+      .img-wrapper {
+        scale: 1.5;
+        rotate: calc(-11deg + var(--num) * 40deg);
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+@use '../utils/_index' as *;
+
+.post-single {
+	@include d_flex($equal_children: true, $gap: 1rem);
+
+	&-container {
+		&>div{
+					background: $gradient_white;
+			padding: 24px;
+			border-radius: 32px;
+			margin-bottom: 16px
+
+		}
+	}
+
+	&-thumbnail {
+		@include d_flex();
+		img {
+			object-fit: cover;
+			max-height: 600px;
+			border-radius: 1.5rem;
+		}
+	}
+&-information{
+								@include font_style('caption');
+								color: $gray_1;
+
+ 
+}
+	&-title {
+					@include font_style('h1');
+		margin-block: 1.75rem 1rem;
+	}
+	&-content{
+		p{
+						@include font_style('body_1');
+						margin-block: 10px;
+						    letter-spacing: 1px;
+
+		}
+	}
+}

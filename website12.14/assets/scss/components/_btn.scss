@@ -1,0 +1,82 @@
+@use '../utils/_index' as *;
+
+.primary-btn {
+	@include base_btn(
+		$psudo_bg_color:
+			linear-gradient(
+				var(--start-color, $gradient_blue_start),
+				var(--end-color, $gradient_blue_end)
+			),
+		$border_color: var(--start-color, $gradient_blue_start)
+	);
+	padding: PxToRem(8) PxToRem(32);
+       	white-space: nowrap;
+
+}
+
+.secondary-btn {
+	@include base_btn(
+		$border_color: #fff,
+		$psudo_bg_color: #fff,
+		$color_hover: $black_1
+	);
+	padding: PxToRem(12) PxToRem(64);
+}
+
+.icon-btn {
+	@include d_flex();
+	font-size: PxToRem(24);
+	border-radius: 50%;
+	padding: PxToRem(8);
+	background: linear-gradient(var(--start-color), var(--end-color));
+	color: $black_1;
+	overflow: hidden;
+
+	@include psudo($inset: 2px, $square: '100%') {
+		background-color: $black_1;
+		border-radius: 50%;
+		z-index: -1;
+		transition: 0.3s ease-in-out;
+		scale: 0;
+	}
+
+	&:hover {
+		color: $white_1;
+		&::after {
+			scale: 1;
+		}
+	}
+}
+
+.link-btn {
+	@include d_flex(row, start, center);
+	@include font_style('h4');
+	color: #16b6fb;
+
+	i {
+		font-size: PxToRem(24);
+		rotate: -45deg;
+	}
+}
+
+.cart-btn {
+	@include base_btn(
+		$border_color: hsla(50, 100%, 47%, 1),
+		$psudo_bg_color: linear-gradient(170.93deg, #ffc806 -6.97%, #cb5500 126.75%),
+		$color_hover: #fff
+	);
+	border-radius: 0.75rem;
+	padding: 0.5rem 4rem;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+
+	i {
+		font-size: 1.25rem;
+	}
+}
+
+.full-width {
+	width: 100%;
+	text-align: center;
+}

@@ -1,0 +1,16 @@
+@use '../utils/_index' as *;
+
+.under-construction {
+	@include d_flex(column, center, center);
+	height: 100vh;
+
+	&-content {
+		text-align: center;
+		text-wrap: balance;
+
+		a {
+			color: $gradient_blue_start;
+			text-decoration: underline;
+		}
+	}
+}

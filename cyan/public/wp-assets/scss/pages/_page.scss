@@ -1,0 +1,54 @@
+@use "../utils/_index" as *;
+
+.thumbnail {
+  // width: 300px;
+  img {
+    border-radius: 32px;
+    height: 50vh;
+    object-fit: cover;
+    max-width: 80vw;
+  }
+}
+.landing {
+  ul {
+    list-style: disc;
+    padding-right: 40px;
+  }
+  ul,
+  p,
+  h1,
+  h2,
+  img,
+  h3 {
+    margin-block: 20px;
+  }
+  blockquote {
+    p {
+      color: $gray_1;
+    }
+  }
+}
+.service-page .swiper * {
+	transition: 0.3s ease;
+}
+
+.service-page {
+
+	 >.swiper {
+        	// max-height: 100vh;
+		> .swiper-wrapper {
+         				height: calc(100vh - var(--header-height));
+                        // overflow-y: auto;
+
+			> .swiper-slide {
+        max-height: 80vh;
+                
+	// overflow: scroll;
+
+				&:not(.swiper-slide-visible) {
+					pointer-events: none;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,15 @@
+@use "../utils/_index" as *;
+.faqcontent {          display: none;
+
+    &.deactive{
+          display: none;
+
+    }
+  &.active {
+    display: block;
+  }
+
+}
+.color{
+background: $cyan_1;
+}

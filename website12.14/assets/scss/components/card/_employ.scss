@@ -1,0 +1,119 @@
+@use "../../utils/_index" as *;
+
+.employ-card {
+  transition: all 0.6s ease-in-out;
+
+  * {
+    transition: all 0.9s ease-in-out;
+  }
+  --border-width: 2px;
+  border: var(--border-width) solid transparent;
+  padding: 8px 8px 20px 8px;
+  .front {
+    transition-duration: 1s;
+    height: auto;
+    clip-path: circle(100%);
+
+    img {
+      // transition: all 3s ease-in-out !important;
+      opacity: 1;
+      box-shadow: 0px 0px 34px 3px #373232;
+    }
+  }
+  .employ-name {
+    @include font_style("h3");
+  }
+  .employ-special {
+    @include font_style("body_2");
+  }
+  .employ_detail,
+  .back-button {
+    box-shadow: 0px 0px 11px -6px #fffbfb;
+    border-radius: 1rem;
+    padding: 8px 20px;
+    // display: none;
+    @include font_style("caption");
+    white-space: nowrap;
+  }
+
+  .behind-card {
+    transition: clip-path 0.8s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    // inset: calc(var(--border-width) * -1) 0 0 0;
+    // height: calc(100% + (var(--border-width) * 2));
+    border-right: none;
+    border-radius: 1rem 0 0 1rem;
+    padding: 20px 16px 0 16px;
+
+    &_name {
+      color: $cyan;
+    }
+    div {
+      clip-path: circle(0%);
+      visibility: hidden;
+      opacity: 0;
+      // transition: all 3s ease-in-out !important;
+    }
+    p {
+      @include font_style("body_2");
+      color: $gray_2;
+      // transition-duration: 0.1s;
+    }
+  }
+  &:hover {
+    border-color: #15eded #04b2e9;
+    .front {
+      clip-path: circle(0%);
+
+      opacity: 0;
+      //  visibility: hidden;
+      //  clip-path: circle(50% at 50% 50%);
+      img {
+        opacity: 0;
+      }
+    }
+    .behind-card {
+      visibility: visible;
+      height: auto;
+      opacity: 1;
+      div {
+        opacity: 1;
+        clip-path: circle(80%);
+        visibility: visible;
+      }
+    }
+  }
+
+  &.open {
+    .behind-card {
+      visibility: visible;
+    }
+    .front {
+      opacity: 0;
+    }
+  }
+  &.close {
+    .behind-card {
+      visibility: hidden !important;
+    }
+    .front {
+      // opacity: 1 !important;
+    }
+  }
+
+  @include mq("xl") {
+    &:hover {
+      .front {
+      }
+    }
+  }
+  @include mq("lg") {
+    border-color: transparent !important;
+    .employ_detail button,
+    .employ_back {
+      display: block;
+    }
+  }
+}

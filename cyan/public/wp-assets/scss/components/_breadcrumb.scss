@@ -1,0 +1,33 @@
+@use '../utils/_index' as *;
+
+.breadcrumb {
+	border-block: 1px solid hsla(0, 0%, 98%, 0.16);
+	margin-block: 2rem 1.5rem;
+
+	nav p {
+		@include d_flex(row, flex-start, center, nowrap);
+		overflow-x: auto;
+
+		> * {
+			min-width: fit-content;
+		}
+
+		a {
+			color: $gray_1;
+			transition: color 0.3s ease;
+
+			&:hover {
+				color: $gradient_blue_start;
+			}
+		}
+
+		.separator {
+			// @include make_icon('\e93a');
+			@include d_flex(row, flex-start, center);
+			// transform: rotateY(180deg);
+			margin-inline: 0.5rem;
+			font-size: 1.75rem;
+			color: $gradient_blue_start;
+		}
+	}
+}

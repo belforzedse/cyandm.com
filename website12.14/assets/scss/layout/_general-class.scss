@@ -1,0 +1,119 @@
+@use "../utils/_index" as *;
+
+.visible {
+  visibility: visible !important;
+}
+
+.pointer-all {
+  pointer-events: all !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.hiddens {
+opacity: 0 !important;}
+
+.fade-off {
+  opacity: 0;
+}
+
+.mask-wrapper {
+  overflow: hidden;
+}
+
+.only-mobile {
+  display: none;
+
+  @include mq("md") {
+    display: block !important;
+  }
+}
+
+.only-desktop {
+  @include mq("md") {
+    display: none !important;
+  }
+}
+
+// @keyframes mymove {
+//   from {
+//     margin-top: 0px;
+//         margin-left: 0px;
+
+//   }
+//   to {
+//     margin-top: 150px;
+//             margin-left: 150px;
+
+//   }
+// }
+
+@keyframes mymove {
+  0%   {margin-top: 0px; margin-left: 0px; }
+  50%  {margin-top: 25px; margin-left: 25px;  }
+   100% {margin-top: 0px; margin-left: 0px;  }
+}
+.bubble {
+  position: relative;
+  width: 100%;
+  div {
+    animation: mymove 10s infinite;
+    // transition: all 0.9s ease-in-out;
+    position: absolute;
+    padding: 40px;
+    span {
+      display: block;
+      box-shadow: inset 20px -1px 27px 3px rgba(0, 0, 0, 0.82);
+      width: 50px;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      transition: all 0.9s ease-in-out;
+
+      &.orange {
+        background: linear-gradient(73deg, #872d08, #feac76);
+      }
+      &.orange-2 {
+        background: linear-gradient(73deg, #872d08, #feac76);
+      }
+      &.red {
+        background: linear-gradient(#c97c93, #741e42);
+        width: 84px;
+        @include mq("md") {
+          width: 49px !important;
+        }
+      }
+      &.blue {
+        background: linear-gradient(73deg, #2b93d1, #0b1964);
+        width: 70px;
+      }
+      &.grey {
+        background: linear-gradient(73deg, #d7f0ff, #493563);
+        width: 38px;
+      }
+      &.grey-2 {
+        background: linear-gradient(73deg, #d7f0ff, #493563);
+        width: 63px;
+      }
+      &.green {
+        background: linear-gradient(73deg, #6ad5ee, #033a46);
+        width: 56px;
+      }
+      &.pink {
+        background: linear-gradient(73deg, #fb78f8, #71126e);
+      }
+      @include mq("md") {
+        width: 30px !important;
+      }
+    }
+    &:hover span {
+      transform: translate(10px, 10px);
+    }
+  }
+  @include mq("md") {
+    position: relative;
+    width: 100%;
+    padding: 50px;
+  }
+}

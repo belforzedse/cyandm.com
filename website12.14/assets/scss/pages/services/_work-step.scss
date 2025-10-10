@@ -1,0 +1,47 @@
+@use '../../utils/_index' as *;
+
+.work-step {
+	counter-increment: work;
+
+	.container {
+		@include d_flex($equal_children: true, $gap: 2rem);
+		margin-block-start: 4rem;
+
+		@include mq('md') {
+			flex-direction: column-reverse;
+		}
+	}
+
+	&-content {
+		a {
+			color: var(--start-color);
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		li {
+			list-style: disc;
+			margin-inline-start: 1.5rem;
+			margin-block-start: 0.5rem;
+
+			&::marker {
+				color: var(--start-color);
+				font-size: 1.5em;
+				line-height: 0;
+			}
+		}
+	}
+
+	&-title {
+		&::before {
+			content: counter(work);
+			margin-inline-end: 1rem;
+			color: #000;
+			font-size: 3rem;
+			text-shadow: 1px 1px 0px var(--start-color),
+				-1px -1px 0px var(--start-color);
+		}
+	}
+}

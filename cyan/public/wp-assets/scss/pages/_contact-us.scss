@@ -1,0 +1,172 @@
+@use "../utils/_index" as *;
+
+.contact {
+  margin-top: 46px;
+  @include d_flex(row, center, center, nowrap, false, 45px);
+  .contant-img {
+    width: 40%;
+    position: relative;
+    img{
+          aspect-ratio: 1 / 1;
+    }
+    @include mq("lg") {
+      width: 75%;
+    }
+  }
+.bubble- {
+    &red {
+      top: 0%;
+      left: 0%;
+    }
+    &orange {
+      top: 22vh;
+    right: -13%;
+      @include mq("md") {
+      top: 22vh;
+        right: 85%;
+      }
+    }
+
+    &blue {
+      top: 0vh;
+      right: -5%;
+      @include mq("md") {
+        top: 4vh;
+      }
+    }
+    &grey {
+      top: 45vh;
+      left: 10%;
+       @include mq("md") {
+                   top: 33vh;
+        left: 79%;
+       }
+    }
+
+    &green {
+      top: 40vh;
+    right: -13%;
+
+      @include mq("md") {
+        top: 24vh;
+        left: 0%;
+      }
+    }
+    &pink {
+        top: 35vh;
+    right: 45%;
+      @include mq("md") {
+            top: 42vh;
+        right: 43%;
+      }
+    }
+
+ 
+  }
+  .contact-info {
+    border: 1px solid rgba(251, 251, 251, 0.16);
+    padding: 24px;
+    border-radius: 32px;
+    background-color: $gradient_white;
+
+    width: 60%;
+    .info {
+      width: 40%;
+      @include d_flex($dir: column, $gap: 24px);
+      .row {
+        @include d_flex($dir: column, $gap: 16px);
+      }
+      .address-text {
+      }
+      .address-map iframe {
+        width: 258px;
+        height: 70px;
+        border-radius: 14px;
+      }
+      @include mq("lg") {
+        width: 85%;
+      }
+    }
+    @include mq("lg") {
+      width: 85%;
+    }
+  }
+  @include mq("lg") {
+    flex-direction: column;
+    margin: 0px;
+  }
+}
+.bbble {
+  margin: auto;
+  border-radius: 50%;
+   position: absolute;
+  right: 5px;
+  &.-red {
+    width: 50px;
+    height: 50px;
+      animation: RD 15s infinite linear;
+
+    background-color: #c97c93;
+    top: 50vh;
+  }
+  &.-blue {
+    width: 50px;
+    height: 50px;
+    background-color: #6ad5ee;
+      animation: BLU 15s infinite linear;
+
+    top: 30vh;
+  }
+  &.-darkblue {
+    width: 85px;
+    height: 85px;
+    top: 60vh;
+      animation: DBLU 15s infinite linear;
+
+    background-color: #2b93d1;
+  }
+  &.-orange {
+    width: 45px;
+    height: 45px;
+      animation: GFG 15s infinite linear;
+
+    background-color: #feac76;
+  }
+}
+@keyframes RD {
+  0% {
+    transform: rotate(20deg) translateY(300px) rotate(20deg);
+  }
+
+  100% {
+    transform: rotate(300deg) translateY(220px) rotate(-360deg);
+  }
+}
+@keyframes GFG {
+  0% {
+    transform: rotate(20deg) translateY(200px) rotate(20deg);
+  }
+
+  100% {
+    transform: rotate(300deg) translateY(120px) rotate(-360deg);
+  }
+}
+
+@keyframes BLU {
+  0% {
+    transform: rotate(40deg) translateY(250px) rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(100deg) translateY(250px) rotate(-00deg);
+  }
+}
+@keyframes DBLU {
+  0% {
+    transform: rotate(180deg) translateY(340px) rotate(-180deg);
+  }
+
+  100% {
+    transform: rotate(100deg) translateY(220px) rotate(-00deg);
+  }
+}

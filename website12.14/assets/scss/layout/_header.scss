@@ -1,0 +1,281 @@
+@use "../utils/_index" as *;
+
+header {
+  @include d_flex(row, space-between, center);
+  padding-block-start: PxToRem(16);
+  position: relative;
+  background-color: $black_1;
+  z-index: 4;
+
+  .right-col {
+    @include d_flex();
+    gap: PxToRem(16);
+    .logo {
+      width: PxToRem(44);
+      @include d_flex(row, center, center);
+
+      svg {
+        #gradientSection {
+          > stop:nth-child(1) {
+            stop-color: var(--start-color);
+          }
+
+          > stop:nth-child(2) {
+            stop-color: var(--end-color);
+          }
+        }
+      }
+    }
+
+    .header-menu {
+      ul.menu {
+        @include d_flex();
+        gap: PxToRem(16);
+
+        li {
+          color: $gray_1;
+          transition: 0.3s ease-in-out;
+          line-height: 4;
+          &:hover {
+            color: $white_1;
+          }
+
+          &.menu-item-has-children {
+            @include d_flex(row, center, center);
+            @include make_icon("\e931") {
+              font-size: PxToRem(24);
+              translate: 0 10%;
+              cursor: pointer;
+              transition: inherit;
+            }
+
+            transition: 0.3s;
+            position: relative;
+
+            ul.sub-menu {
+              position: absolute;
+              background: $black_1;
+              color: $white_1;
+              inset: 0;
+              top: 100%;
+              height: fit-content;
+              width: 360px;
+              pointer-events: none;
+              opacity: 0;
+              transition: inherit;
+              border-radius:PxToRem(32);
+              border: 1px solid var(--start-color);
+              padding: 24px;
+              li {
+                display: block;
+                padding: 1rem 0.75rem;
+                line-height: 1;
+                          &:hover {
+background-color: #0E111C;
+                          }
+              }
+            }
+
+            &:hover {
+              &::after {
+                rotate: 180deg;
+              }
+
+              > ul.sub-menu {
+                pointer-events: all;
+                opacity: 1;
+              }
+            }
+          }
+        }
+
+        > li {
+          &.current-menu-item,
+          &.current-menu-parent {
+            --El_width: 125%;
+            $El_top: PxToRem(-16);
+
+            color: $white_1 !important;
+
+            @include psudo($inset: unset) {
+              background: var(--start-color);
+              width: var(--El_width);
+              height: PxToRem(4);
+              border-radius: PxToRem(1000);
+              top: $El_top;
+              left: 50%;
+              translate: -50%;
+              overflow: hidden;
+              pointer-events: none;
+              z-index: -1;
+            }
+
+            @include psudo(before, $inset: unset) {
+              z-index: -1;
+              background: linear-gradient(
+                var(--end-color),
+                rgba(#000, 0.7) 60%
+              );
+              pointer-events: none;
+              width: var(--El_width);
+              height: PxToRem(48);
+              top: $El_top;
+              left: 50%;
+              translate: -50%;
+              opacity: 0.7;
+            }
+
+            &:hover {
+              &::after {
+                rotate: 0deg !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .left-col {
+    @include d_flex($a_i: center);
+    gap: PxToRem(16);
+
+    .primary-btn {
+      @include mq("md") {
+        display: none;
+      }
+    }
+  }
+
+  @include mq("xl") {
+    .header-menu {
+      display: none;
+    }
+  }
+}
+#customize_section {
+  opacity: 0;
+  height: 0;
+  visibility: hidden;
+  display: flex;
+  top: 0;
+  transition: all 0.7s ease-in-out;
+  backdrop-filter: blur(120px);
+
+  &.active {
+    opacity: 1;
+    height: auto;
+    visibility: visible;
+    width: 100%;
+    height: 100vh;
+  }
+  .customize {
+    @include font_style("body_2");
+    width: 40%;
+    border-radius: 33px;
+    border: 1px solid $gradient_blue_end;
+    border-color: $gradient_blue_start $gradient_blue_end;
+    top: 20vh;
+    padding: 32px;
+    backdrop-filter: blur(240px);
+
+    #close_customize {
+      @include make_icon("\e92f");
+
+      padding: 10px;
+      border: 1px solid;
+      border-radius: 36px;
+      margin: 20px;
+      width: 44px;
+      height: 44px;
+
+      &:hover {
+        background: $gradient_blue_1;
+      }
+    }
+
+    button {
+      border: 1px solid $gradient_blue_end;
+      border-color: $gradient_blue_start $gradient_blue_end;
+      border-radius: 2.5rem;
+      padding: 8px 24px 8px 32px;
+      transition: all 3s ease-in-out;
+      &:hover {
+        background: $gradient_blue_1;
+      }
+    }
+    p {
+      @include d_flex($a_i: center, $gap: 10px);
+      border: 1px solid $gradient_white;
+      text-align: start;
+      background: $black_2;
+      border-radius: 2.5rem;
+      padding: 8px 24px;
+      transition: all 0.5s ease-in-out;
+
+      &.name {
+        @include make_icon_before("\e90e");
+      }
+      &.phone {
+        @include make_icon_before("\e901");
+      }
+      &.project {
+        @include make_icon_before("\e928");
+      }
+      &.budget {
+        @include make_icon_before("\e934");
+      }
+      &.massage {
+        @include make_icon_before("\e93c");
+        align-items: start;
+        &::before {
+          margin-top: 10px;
+        }
+      }
+      input,
+      textarea {
+        width: 100%;
+        background: transparent;
+        &:focus {
+          outline: none;
+        }
+      }
+      &::before {
+        @include font_style("h3");
+      }
+      &:active,
+      &:hover {
+        box-shadow: 0 0 7px -2px white;
+      }
+    }
+    @include mq("lg") {
+      width: 90%;
+    }
+  }
+}
+// body[data-scrolled='true'] {
+// 	header {
+// 		position: fixed;
+// 		width: calc(100%- var(--margin-from-side) * 2);
+// 		padding-block-end: 0.75rem;
+// 	}
+// }
+.search-link {
+  border: 1px solid #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
+  flex-wrap: nowrap;
+  gap: 0;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  padding: 0.5rem;
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+  transition: all 0.6s ease-in-out;
+  &:hover {
+    border: 1px solid #15eded;
+  }
+}

@@ -1,0 +1,105 @@
+@use "../utils/_index" as *;
+.archive-project {
+  
+    // cursor: url(https://hess.gold/wp-content/uploads/2024/07/download-1.svg) 1 1 ,auto !important;
+
+  section {
+
+    z-index: 555555;
+
+    img {
+      width: 50%;
+    }
+  }
+  .bubble-service{
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden; 
+  top: 0;
+  transition: all 3s ease-in;
+  opacity: 0;
+visibility: hidden;  
+z-index:-5;
+  }
+  .bubble-fixed {
+    position: sticky;
+    top: 60%;
+    right: 40%;
+    border-radius: 50%;
+    // animation: move 10s infinite;
+    width: 64px;
+    aspect-ratio: 1/1;
+    background-color: #15eded;
+    box-shadow: inset 20px -1px 27px 3px rgba(72, 88, 94, 0.82);
+        animation: fixed 5s infinite linear;
+
+  }
+  @keyframes fixed {
+    0% {
+      right: 40%;
+      // transform: translatex(0) translatey(0);
+    }
+      25% {
+        right: 42%;
+      // transform: translatex(20px) translatey(20px);
+    }
+    50% {
+              right: 46%;
+
+      // transform: translatex(50px) translatey(50px);
+    }
+        75% {
+                  right: 42%;
+
+      // transform: translatex(10px) translatey(10px);
+    }
+    100% {
+              right: 40%;
+
+      // transform: translatex(220px) translatey(220px);
+    }
+  }
+
+  .service-pages {
+    .service-card {
+      &:nth-child(odd) {
+        flex-direction: row-reverse;
+      }
+      a.callus {
+        width: 180px;
+        font-size: PxToRem(16);
+        border-radius: 40px;
+        padding: 12px;
+        transition: all 0.5s ease-in-out;
+
+        background: linear-gradient(#15eded, #04b2e9);
+        color: $black_1;
+        overflow: hidden;
+        @include psudo($inset: 2px, $square: "100%") {
+          color: $black_1;
+          transition: all 0.7s ease-in-out;
+          scale: 0;
+        }
+
+        &:hover {
+          color: $white_1;
+          background: #04b2e9;
+          &::after {
+            // scale: 1;
+          }
+        }
+        @include mq("md") {
+          width: 100%;
+        }
+      }
+
+      @include mq("md") {
+        flex-direction: column !important;
+      }
+    }
+  }
+}
+body[data-scrolled="true"] .bubble-service {
+opacity: 1;
+visibility: visible;}

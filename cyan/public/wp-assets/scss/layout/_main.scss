@@ -1,0 +1,154 @@
+@use '../utils/_index' as *;
+
+.container {
+	max-width: 1440px;
+	margin-inline: auto;
+
+	@media (width <= 1440px) {
+		padding-inline: PxToRem(16);
+	}
+}
+
+body {
+	position: relative;
+	background-color: $black_1;
+	color: $white_1;
+	overflow: hidden;
+	@include psudo(after, '', 0, 100%) {
+		background-color: rgba(#000000, 0.6);
+		backdrop-filter: blur(20px);
+		transition: opacity 0.3s ease-in;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	&[data-popup-open='true'] {
+		&::after {
+			opacity: 1;
+		}
+	}
+}
+
+html {
+	overflow-x: hidden;
+
+	&:has(body[data-popup-open='true']) {
+		overflow: hidden;
+	}
+}
+
+main > section:not(:first-child) {
+	margin-block-start: PxToRem(64);
+}
+main  {
+	// padding-block-end: PxToRem(64);
+}
+.section-title {
+	@include d_flex(row, space-between);
+	margin-block-end: PxToRem(20);
+
+	.primary-btn {
+		@include mq('md') {
+			display: none;
+		}
+	}
+}
+
+.section-view-all {
+	display: none;
+	@include mq('md') {
+		display: block;
+	}
+}
+ 
+.custom_link {
+	color: #3de2f2;
+}
+.pagination {
+	li.active{padding: 4px; 
+		    width: 30px;
+			aspect-ratio: 1/1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+	a{
+		display: flex;
+		   align-items: center;
+
+	}
+	}
+}
+
+.preloader-div{
+  width: 100%;
+  height: 100vh;
+  opacity:1;
+  // overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background-color: hsl(227, 44%, 6%);
+  z-index: 1111111111;
+  transition: all 0.8s ease-in-out;
+
+
+// .loader {
+//   display: inline-grid;
+//   font-size: 50px;
+//     // background-image: url('../img/logo.png');
+//      background-image: url("../imgs/logo.png");
+//      background-position: center;
+//      background-size: 100%;
+//      width: 150px;
+//      height: 150px;
+
+// }
+
+// .loader  {
+//   animation: l10 1s infinite;
+// }
+// @keyframes l10 {
+//   to {transform:scale(1.8);opacity:0}
+// }
+
+
+
+
+
+
+
+
+// }
+
+
+
+
+
+
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  display: inline-flex;
+  gap:30px;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  height: 30px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    linear-gradient($gray_1  0 0) top/100% 0% no-repeat,
+    radial-gradient(farthest-side,$gray_1 95%,#0000) 50%/8px 8px no-repeat
+    #fff;
+	  animation: l9 1s infinite ease-in;
+}
+@keyframes l9 {
+  0%  {background-size:100% 0%,8px 8px;background-position:top, 50% 50%}
+  80% {background-size:100% 70%,8px 8px;background-position:top, 50% 70%}
+  84%,
+  100%{background-size:100% 0%,8px 8px;background-position:top, 50% 50%}
+}
+}

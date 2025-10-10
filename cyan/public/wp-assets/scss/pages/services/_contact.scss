@@ -1,0 +1,52 @@
+@use '../../utils/_index' as *;
+
+.service-contact {
+	--gap: 0.75rem;
+
+	img {
+		max-height: 300px;
+		max-width: 300px;
+		object-fit: contain;
+	}
+
+	&-top {
+		margin-block: 4rem 4rem;
+		@include d_flex(row, center, center, $equal_children: true);
+
+		@include mq('md') {
+			margin-block: 0 var(--gap);
+			flex-wrap: nowrap;
+			gap: var(--gap);
+
+			img {
+				max-width: 50%;
+			}
+		}
+	}
+
+	&-bottom {
+		@include d_flex(row, space-around, $equal_children: true);
+
+		@include mq('md') {
+			flex-wrap: nowrap;
+			gap: var(--gap);
+
+			img {
+				max-width: 50%;
+			}
+		}
+	}
+
+	&-content {
+		@include d_flex(column, center, center, $gap: 1rem);
+
+		@include mq('md') {
+			text-align: center;
+			margin-block-end: 2rem;
+			.t2 {
+				margin-block-start: 1rem;
+				@include font_style('h1');
+			}
+		}
+	}
+}

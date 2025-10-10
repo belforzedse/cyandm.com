@@ -1,0 +1,43 @@
+@keyframes floating {
+  from {
+    translate: 0 -70%;
+  }
+  to {
+    translate: 0 70%;
+  }
+}
+
+@keyframes bottom_fire_container {
+  from {
+    translate: 0 -10%;
+  }
+
+  to {
+    translate: 0 10%;
+  }
+}
+
+@keyframes bottom_fire_circle {
+  from {
+    translate: -5% -20%;
+  }
+
+  to {
+    translate: 5% 10%;
+  }
+}
+
+@keyframes rotate360 {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes fadeOn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
