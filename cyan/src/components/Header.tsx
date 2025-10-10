@@ -114,16 +114,48 @@ const PhoneIcon = ({ className }: { className?: string }) => (
 
 const MenuIcon = ({ className }: { className?: string }) => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    className={className}
+    width="44"
+    height="44"
+    viewBox="0 0 44 44"
     fill="none"
-    stroke="currentColor"
-    strokeWidth="1.6"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
   >
-    <path d="M4 6h16" />
-    <path d="M4 12h16" />
-    <path d="M4 18h16" />
+    <rect
+      width="44"
+      height="44"
+      rx="22"
+      fill="url(#mobileMenuToggleGradient)"
+      fillOpacity="0.1"
+    />
+    <rect
+      x="0.5"
+      y="0.5"
+      width="43"
+      height="43"
+      rx="21.5"
+      stroke="#FBFBFB"
+      strokeOpacity="0.16"
+    />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M13.5385 16.7789C13.5385 15.2212 14.8012 13.9584 16.359 13.9584C17.9167 13.9584 19.1795 15.2212 19.1795 16.7789C19.1795 18.3366 17.9167 19.5994 16.359 19.5994C14.8012 19.5994 13.5385 18.3366 13.5385 16.7789ZM16.359 12.4199C13.9516 12.4199 12 14.3715 12 16.7789C12 19.1863 13.9516 21.1379 16.359 21.1379C18.7664 21.1379 20.7179 19.1863 20.7179 16.7789C20.7179 14.3715 18.7664 12.4199 16.359 12.4199ZM24.8205 16.7789C24.8205 15.2212 26.0833 13.9584 27.641 13.9584C29.1988 13.9584 30.4615 15.2212 30.4615 16.7789C30.4615 18.3366 29.1988 19.5994 27.641 19.5994C26.0833 19.5994 24.8205 18.3366 24.8205 16.7789ZM27.641 12.4199C25.2336 12.4199 23.2821 14.3715 23.2821 16.7789C23.2821 19.1863 25.2336 21.1379 27.641 21.1379C30.0484 21.1379 32 19.1863 32 16.7789C32 14.3715 30.0484 12.4199 27.641 12.4199ZM16.359 25.2404C14.8012 25.2404 13.5385 26.5032 13.5385 28.0609C13.5385 29.6187 14.8012 30.8815 16.359 30.8815C17.9167 30.8815 19.1795 29.6187 19.1795 28.0609C19.1795 26.5032 17.9167 25.2404 16.359 25.2404ZM12 28.0609C12 25.6535 13.9516 23.702 16.359 23.702C18.7664 23.702 20.7179 25.6535 20.7179 28.0609C20.7179 30.4683 18.7664 32.4199 16.359 32.4199C13.9516 32.4199 12 30.4683 12 28.0609ZM27.641 23.702C25.2336 23.702 23.2821 25.6535 23.2821 28.0609C23.2821 30.4683 25.2336 32.4199 27.641 32.4199C30.0484 32.4199 32 30.4683 32 28.0609C32 25.6535 30.0484 23.702 27.641 23.702ZM24.8205 28.0609C24.8205 26.5032 26.0833 25.2404 27.641 25.2404C29.1988 25.2404 30.4615 26.5032 30.4615 28.0609C30.4615 29.6187 29.1988 30.8815 27.641 30.8815C26.0833 30.8815 24.8205 29.6187 24.8205 28.0609Z"
+      fill="#A6B2B9"
+    />
+    <defs>
+      <linearGradient
+        id="mobileMenuToggleGradient"
+        x1="22"
+        y1="0"
+        x2="22"
+        y2="44"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor="white" stopOpacity="0.22" />
+        <stop offset="1" stopColor="white" stopOpacity="0.25" />
+      </linearGradient>
+    </defs>
   </svg>
 );
 
@@ -204,6 +236,7 @@ export function Header({
   const { open } = useModal();
   const phoneNumber = contact.phoneNumbers?.[0] ?? "";
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileExpanded, setMobileExpanded] = useState<MobileExpandedState>({});
   const headerRef = useRef<HTMLElement | null>(null);
 
   const headerStyle = useMemo(
@@ -220,9 +253,144 @@ export function Header({
     document.documentElement.lang = "fa";
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const headerElement = headerRef.current;
+    if (!headerElement) return;
+
+    const updateHeight = () => {
+      document.documentElement.style.setProperty(
+        "--header-height",
+        `${headerElement.offsetHeight}px`
+      );
+    };
+
+    updateHeight();
+
+    if ("ResizeObserver" in window) {
+      const observer = new ResizeObserver(updateHeight);
+      observer.observe(headerElement);
+      return () => {
+        observer.disconnect();
+      };
+    }
+
+    const interval = window.setInterval(updateHeight, 500);
+    return () => {
+      window.clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    setMobileOpen(false);
+    setMobileExpanded({});
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!mobileOpen) {
+      setMobileExpanded({});
+    }
+  }, [mobileOpen]);
+
+  const toggleMobileItem = (key: string) => {
+    setMobileExpanded((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
+  const handleMobileNavigate = () => {
+    setMobileOpen(false);
+  };
+
+  const renderMobileTree = (items: NavigationTree[]) =>
+    items.map((item) => {
+      const hasChildren = Boolean(item.children?.length);
+      const isExact = pathname === item.normalizedHref;
+      const isParent =
+        !isExact &&
+        item.children?.some((child) =>
+          child.normalizedHref === "/"
+            ? pathname === child.normalizedHref
+            : pathname.startsWith(child.normalizedHref)
+        );
+      const itemKey = item.normalizedHref || item.href;
+      const isExpanded = mobileExpanded[itemKey] ?? false;
+
+      const itemClassName = clsx("menu-item", {
+        "menu-item-has-children": hasChildren,
+        "current-menu-item": isExact,
+        "current-menu-parent": isParent,
+      });
+
+      return (
+        <li
+          key={item.href}
+          className={itemClassName}
+          data-active={hasChildren && isExpanded ? "true" : undefined}
+        >
+          {hasChildren ? (
+            <button
+              type="button"
+              className="menu-link"
+              onClick={() => toggleMobileItem(itemKey)}
+            >
+              <span>{item.label}</span>
+              <span className="submenu-indicator" aria-hidden="true">
+                <ChevronIcon />
+              </span>
+            </button>
+          ) : (
+            <Link
+              href={item.href}
+              className="menu-link"
+              onClick={handleMobileNavigate}
+            >
+              {item.label}
+            </Link>
+          )}
+          {hasChildren && (
+            <div className="grid-wrapper">
+              <ul className="sub-menu">
+                {item.children!.map((child) => (
+                  <li key={child.href} className="menu-item">
+                    <Link href={child.href} onClick={handleMobileNavigate}>
+                      {child.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </li>
+      );
+    });
+
+  const mobileToggleLabel = mobileOpen
+    ? "بستن منوی موبایل"
+    : "باز کردن منوی موبایل";
+
   return (
     <header ref={headerRef} className="container" style={headerStyle}>
       <div className="right-col">
+        <button
+          type="button"
+          className="mobile-menu-toggle"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
+          onClick={() => setMobileOpen((prev) => !prev)}
+        >
+          {mobileOpen ? <CloseIcon /> : <MenuIcon />}
+          <span className="sr-only">{mobileToggleLabel}</span>
+        </button>
         <Link href="/" aria-label="لوگو">
           <Logo />
         </Link>
@@ -245,6 +413,33 @@ export function Header({
             <PhoneIcon className="icon-call" />
           </a>
         )}
+      </div>
+      <div
+        className="mobile-menu"
+        id="mobile-menu"
+        data-active={mobileOpen ? "true" : undefined}
+      >
+        <div className="mobile-menu-actions">
+          <button
+            type="button"
+            className="primary-btn"
+            onClick={() => {
+              open("make-project");
+              setMobileOpen(false);
+            }}
+          >
+            یه پروژه بساز
+          </button>
+          {phoneNumber && (
+            <a href={`tel:${phoneNumber}`} className="phone-link">
+              <PhoneIcon className="icon-call" />
+              <span>{phoneNumber}</span>
+            </a>
+          )}
+        </div>
+        <nav className="mobile-menu-nav" aria-label="منوی اصلی موبایل">
+          <ul className="menu">{renderMobileTree(tree)}</ul>
+        </nav>
       </div>
     </header>
   );
