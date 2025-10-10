@@ -1,10 +1,17 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { useEffect, useState } from "react";
-import gsap from "gsap";
-import { EasePack, ScrollToPlugin, ScrollTrigger } from "gsap/all";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { MotionStyle } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useMotionValueEvent,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Thumbs } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
@@ -25,159 +32,103 @@ const planets = [
 
 const starIcons = Array.from({ length: 5 });
 
-const usePreloaderAnimation = () => {
+const useMediaQuery = (query: string) => {
+  const [matches, setMatches] = useState(false);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const isLargeScreen = window.matchMedia("(min-width: 1024px)");
-    if (!isLargeScreen.matches) return;
 
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, EasePack);
+    const mediaQuery = window.matchMedia(query);
+    const updateMatch = () => setMatches(mediaQuery.matches);
 
-    const preloader = document.querySelector(".preloader");
-    if (!preloader) return;
+    updateMatch();
+    mediaQuery.addEventListener("change", updateMatch);
 
-    const toggleShow = (element: Element | null, shouldShow: boolean) => {
-      if (!element) return;
-      element.classList.toggle("visible", shouldShow);
-      element.classList.toggle("pointer-all", shouldShow);
-    };
+    return () => mediaQuery.removeEventListener("change", updateMatch);
+  }, [query]);
 
-    const toggleFadeOff = (element: Element | null, shouldFadeOff: boolean) => {
-      element?.classList.toggle("fade-off", shouldFadeOff);
-    };
-
-    const listeners: Array<() => void> = [];
-    let scrollTriggerInstance: ReturnType<typeof ScrollTrigger.create> | null = null;
-
-    const ctx = gsap.context(() => {
-      const clockSection = document.querySelector(".clock-section");
-      const bottomFire = document.querySelector(".bottom-fire");
-      const multiPlanetSection = document.querySelector(".multi-planet");
-
-      const clockSpinTL = gsap.timeline({ repeat: -1 });
-      clockSpinTL.to(".clock", { duration: 5, ease: "none", "--rotate": 360 });
-
-      const slide2ContentTL = gsap.timeline();
-      document
-        .querySelectorAll<HTMLElement>(".clock-section .content .mask-wrapper > *")
-        .forEach((element, index) => {
-          slide2ContentTL.fromTo(
-            element,
-            {
-              y: 100,
-              opacity: 0,
-              duration: 1,
-              ease: "power1.out",
-              delay: index * 5,
-            },
-            {
-              y: 0,
-              opacity: 1,
-            },
-          );
-        });
-
-      const multiPlanetTL = gsap.timeline();
-      multiPlanetTL.to(".multi-planet", { opacity: 1 });
-      multiPlanetTL.to(".light-planet", { opacity: 1 });
-      gsap.utils.toArray<HTMLElement>(".multi-planet .planet-con").forEach((planet) => {
-        multiPlanetTL.from(planet, { y: 50, opacity: 0 });
-      });
-      multiPlanetTL.fromTo(
-        ".multi-planet .scroll-down",
-        { opacity: 0, y: 100 },
-        { opacity: 1, y: 0 },
-      );
-
-      const endClock = () => {
-        toggleShow(clockSection, true);
-        toggleFadeOff(bottomFire, true);
-        clockSpinTL.timeScale(0.05);
-      };
-
-      const backToStart = () => {
-        clockSpinTL.timeScale(1);
-        toggleShow(clockSection, false);
-        toggleFadeOff(bottomFire, false);
-      };
-
-      const startMultiPlanet = () => {
-        toggleShow(multiPlanetSection, true);
-      };
-
-      const preloaderTL = gsap.timeline({ defaults: { duration: 1 } });
-      preloaderTL.addLabel("start");
-      preloaderTL.to(".clock", { scale: 18, onComplete: endClock });
-      preloaderTL.addLabel("endClock");
-      preloaderTL.add(slide2ContentTL, "endClock");
-      preloaderTL.addLabel("endShowingContent");
-      preloaderTL.to(".clock", { borderRadius: 0 });
-      preloaderTL
-        .to(".pre-clock , .clock-section, .clock", {
-          y: () => window.innerHeight * -1,
-          duration: 3,
-          onComplete: startMultiPlanet,
-        })
-        .addLabel("endOfSlide2");
-      preloaderTL.addLabel("startMultiPlanet").add(multiPlanetTL).addLabel("endMultiPlanet");
-
-      scrollTriggerInstance = ScrollTrigger.create({
-        animation: preloaderTL,
-        trigger: ".preloader",
-        pin: true,
-        scrub: 1,
-        start: "+=1",
-        end: "+=3000",
-        onLeaveBack: backToStart,
-      });
-
-      const attachClickToLabel = (selector: string, label: string) => {
-        const element = document.querySelector(selector);
-        if (!element) return;
-
-        const handler = () => {
-          const scrollPosition = preloaderTL.scrollTrigger?.labelToScroll(label);
-          if (scrollPosition == null) return;
-
-          gsap.to(window, {
-            duration: 5,
-            scrollTo: scrollPosition,
-            ease: "power1.inOut",
-          });
-        };
-
-        element.addEventListener("click", handler);
-        listeners.push(() => element.removeEventListener("click", handler));
-      };
-
-      attachClickToLabel(".pre-clock .scroll-down", "endShowingContent");
-      attachClickToLabel("#letsGo", "endOfSlide2");
-    }, preloader);
-
-    return () => {
-      listeners.forEach((cleanup) => cleanup());
-      scrollTriggerInstance?.kill();
-      ctx.revert();
-    };
-  }, []);
+  return matches;
 };
 
 export default function Home() {
   const { hero, projects, testimonials, brands, services, team, posts, faqs } = homePage;
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
-  usePreloaderAnimation();
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const preloaderWrapperRef = useRef<HTMLDivElement | null>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: preloaderWrapperRef,
+    offset: ["start start", "end end"],
+  });
+
+  const fallbackProgress = useMotionValue(0);
+  const springProgress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    mass: 0.2,
+  });
+  const activeProgress = isDesktop ? springProgress : fallbackProgress;
+
+  useEffect(() => {
+    if (!isDesktop) {
+      fallbackProgress.set(0);
+    }
+  }, [fallbackProgress, isDesktop]);
+
+  const [progressValue, setProgressValue] = useState(0);
+  useMotionValueEvent(activeProgress, "change", (value) => {
+    setProgressValue(value);
+  });
+
+  const clockScale = useTransform(activeProgress, [0, 0.2], [1, 18]);
+  const clockBorderRadius = useTransform(activeProgress, [0.24, 0.35], ["50%", "0%"]);
+  const preClockY = useTransform(activeProgress, [0.32, 0.48], ["0%", "-120%"]);
+  const preClockOpacity = useTransform(activeProgress, [0.28, 0.38], [1, 0]);
+
+  const clockSectionY = useTransform(activeProgress, [0.26, 0.38], ["30%", "0%"]);
+  const clockSectionOpacity = useTransform(activeProgress, [0.25, 0.36], [0, 1]);
+
+  const multiPlanetOpacity = useTransform(activeProgress, [0.58, 0.75], [0, 1]);
+  const multiPlanetY = useTransform(activeProgress, [0.58, 0.75], ["12%", "0%"]);
+  const lightPlanetOpacity = useTransform(activeProgress, [0.6, 0.8], [0, 1]);
+
+  const showClockSection = isDesktop ? progressValue >= 0.26 : true;
+  const showMultiPlanet = isDesktop ? progressValue >= 0.58 : true;
+  const fadeBottomFire = isDesktop ? progressValue >= 0.26 : false;
+
+  const scrollToProgress = useCallback(
+    (target: number) => {
+      if (!isDesktop || !preloaderWrapperRef.current) return;
+
+      const element = preloaderWrapperRef.current;
+      const rect = element.getBoundingClientRect();
+      const start = window.scrollY + rect.top;
+      const height = element.offsetHeight;
+
+      window.scrollTo({
+        top: start + height * target,
+        behavior: "smooth",
+      });
+    },
+    [isDesktop],
+  );
+
+  const handlePreClockScroll = useCallback(() => scrollToProgress(0.35), [scrollToProgress]);
+  const handleLetsGo = useCallback(() => scrollToProgress(0.62), [scrollToProgress]);
+  const handleMultiPlanetScroll = useCallback(() => scrollToProgress(0.95), [scrollToProgress]);
 
   // Service cards mouse follow effect
   useEffect(() => {
     const serviceCards = document.querySelectorAll(".single-service-card");
+    const handlers = new Map<Element, (event: MouseEvent) => void>();
 
-    const handleMouseMove = (e: MouseEvent, card: Element) => {
+    const handleMouseMove = (event: MouseEvent, card: Element) => {
       const rect = card.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
 
-      const ball = card.querySelector(".ball") as HTMLElement;
+      const ball = card.querySelector<HTMLElement>(".ball");
       if (ball) {
         ball.style.setProperty("--left", `${x}%`);
         ball.style.setProperty("--top", `${y}%`);
@@ -185,16 +136,37 @@ export default function Home() {
     };
 
     serviceCards.forEach((card) => {
-      const handler = (e: Event) => handleMouseMove(e as MouseEvent, card);
+      const handler = (event: MouseEvent) => handleMouseMove(event, card);
+      handlers.set(card, handler);
       card.addEventListener("mousemove", handler);
     });
 
     return () => {
-      serviceCards.forEach((card) => {
-        card.removeEventListener("mousemove", () => {});
+      handlers.forEach((handler, card) => {
+        card.removeEventListener("mousemove", handler);
       });
     };
   }, []);
+
+  const preClockMotionStyle: MotionStyle | undefined = isDesktop
+    ? { y: preClockY, opacity: preClockOpacity }
+    : undefined;
+  const clockSectionMotionStyle: MotionStyle | undefined = isDesktop
+    ? { y: clockSectionY, opacity: clockSectionOpacity }
+    : undefined;
+  const multiPlanetMotionStyle: MotionStyle | undefined = isDesktop
+    ? { y: multiPlanetY, opacity: multiPlanetOpacity }
+    : undefined;
+  const lightPlanetMotionStyle: MotionStyle | undefined = isDesktop
+    ? { opacity: lightPlanetOpacity }
+    : undefined;
+  const clockMotionStyle: MotionStyle = isDesktop
+    ? {
+        scale: clockScale,
+        borderRadius: clockBorderRadius,
+        animationDuration: showClockSection ? "100s" : "5s",
+      }
+    : { animationDuration: "5s" };
 
   return (
     <>
@@ -205,51 +177,107 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="container preloader">
-        <section className="pre-clock">
-          <div className="content">
-            <p className="h1">حواست باشه</p>
-            <h1>
-              زمــــان داره به سرعـــــــــــــــــــــت می‌گذره
-              <div className="clock" />
-            </h1>
-            <p className="h1">از کسب و کار عقب نمونی</p>
-          </div>
-          <ScrollDown />
-        </section>
+      <div ref={preloaderWrapperRef} className="preloader-wrapper">
+        <div className="container preloader">
+          <motion.section className="pre-clock" style={preClockMotionStyle} initial={false}>
+            <div className="content">
+              <p className="h1">حواست باشه</p>
+              <h1>
+                زمــــان داره به سرعـــــــــــــــــــــت می‌گذره
+                <motion.div className="clock" style={clockMotionStyle} aria-hidden />
+              </h1>
+              <p className="h1">از کسب و کار عقب نمونی</p>
+            </div>
+            <ScrollDown onClick={isDesktop ? handlePreClockScroll : undefined} />
+          </motion.section>
 
-        <section className="clock-section container">
-          <div className="content">
-            <div className="mask-wrapper">
-              <p className="h1">همین الان</p>
-            </div>
-            <div className="mask-wrapper">
-              <h2>وقتشه قدم اول رو برداری</h2>
-            </div>
-            <div className="mask-wrapper">
-              <p className="h1">اگه می‌خوای بدونی از کجا باید شروع کنی...</p>
-            </div>
-            <div className="mask-wrapper">
-              <span id="letsGo" className="secondary-btn cursor-pointer">
-                بزن بریم
-              </span>
-            </div>
-          </div>
-        </section>
-
-        <section className="multi-planet">
-          {planets.map((planet) => (
-            <div key={planet.className} className={`planet-con planet-${planet.className}`}>
-              <div className="cta">
-                <Link href={planet.href}>{planet.title}</Link>
+          <motion.section
+            className={`clock-section container${showClockSection ? " visible pointer-all" : ""}`}
+            style={clockSectionMotionStyle}
+            initial={false}
+          >
+            <div className="content">
+              <div className="mask-wrapper">
+                <motion.p
+                  className="h1"
+                  initial={false}
+                  animate={showClockSection ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
+                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: showClockSection ? 0 : 0 }}
+                >
+                  همین الان
+                </motion.p>
+              </div>
+              <div className="mask-wrapper">
+                <motion.h2
+                  initial={false}
+                  animate={showClockSection ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
+                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: showClockSection ? 0.25 : 0 }}
+                >
+                  وقتشه قدم اول رو برداری
+                </motion.h2>
+              </div>
+              <div className="mask-wrapper">
+                <motion.p
+                  className="h1"
+                  initial={false}
+                  animate={showClockSection ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
+                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: showClockSection ? 0.5 : 0 }}
+                >
+                  اگه می‌خوای بدونی از کجا باید شروع کنی...
+                </motion.p>
+              </div>
+              <div className="mask-wrapper">
+                <motion.span
+                  id="letsGo"
+                  className="secondary-btn cursor-pointer"
+                  initial={false}
+                  animate={showClockSection ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
+                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: showClockSection ? 0.75 : 0 }}
+                  onClick={isDesktop ? handleLetsGo : undefined}
+                  onKeyDown={(event) => {
+                    if (!isDesktop) return;
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      handleLetsGo();
+                    }
+                  }}
+                  role={isDesktop ? "button" : undefined}
+                  tabIndex={isDesktop ? 0 : undefined}
+                >
+                  بزن بریم
+                </motion.span>
               </div>
             </div>
-          ))}
-          <ScrollDown />
-          <div className="light-planet" />
-        </section>
+          </motion.section>
 
-        <BottomFire variant="cyan" />
+          <motion.section
+            className={`multi-planet${showMultiPlanet ? " visible pointer-all" : ""}`}
+            style={multiPlanetMotionStyle}
+            initial={false}
+          >
+            {planets.map((planet, index) => (
+              <motion.div
+                key={planet.className}
+                className={`planet-con planet-${planet.className}`}
+                initial={false}
+                animate={showMultiPlanet ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                transition={{
+                  duration: 0.8,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: showMultiPlanet ? index * 0.2 : 0,
+                }}
+              >
+                <div className="cta">
+                  <Link href={planet.href}>{planet.title}</Link>
+                </div>
+              </motion.div>
+            ))}
+            <ScrollDown onClick={isDesktop ? handleMultiPlanetScroll : undefined} />
+            <motion.div className="light-planet" style={lightPlanetMotionStyle} initial={false} />
+          </motion.section>
+
+          <BottomFire variant="cyan" className={fadeBottomFire ? "fade-off" : ""} />
+        </div>
       </div>
 
       <main className="front-page">
