@@ -1,58 +1,6 @@
 @import "tailwindcss";
 @import "./wordpress-layout.css";
 
-/* Preloader styles */
-#preloader {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: hsl(227, 44%, 6%);
-  transition: opacity 0.8s ease-in-out;
-}
-
-#preloader.hide {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.loader-eye {
-  height: 30px;
-  width: 30px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background:
-    linear-gradient(#4b5563 0 0) top/100% 0% no-repeat,
-    radial-gradient(farthest-side, #4b5563 95%, #0000) 50% 50%/8px 8px no-repeat
-    #fff;
-  animation: eye-blink 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes eye-blink {
-  0%, 20%, 100% {
-    background-size: 100% 0%, 8px 8px;
-    background-position: top, 50% 50%;
-  }
-  25% {
-    background-size: 100% 50%, 8px 8px;
-    background-position: top, 50% 60%;
-  }
-  30% {
-    background-size: 100% 100%, 8px 8px;
-    background-position: top, 50% 70%;
-  }
-  35% {
-    background-size: 100% 50%, 8px 8px;
-    background-position: top, 50% 60%;
-  }
-  40% {
-    background-size: 100% 0%, 8px 8px;
-    background-position: top, 50% 50%;
-  }
-}
-
 :root {
   color-scheme: dark;
   --background: #080519;
