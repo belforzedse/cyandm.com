@@ -1,45 +1,59 @@
-﻿import Link from "next/link";
-import { PageHero } from "../../components/PageHero";
 import { Breadcrumb } from "../../components/Breadcrumb";
+import { ScrollDown } from "../../components/ScrollDown";
+import { ServiceArchiveCard } from "../../components/ServiceArchiveCard";
 import { services } from "../../data/global";
+
+const breadcrumbItems = [
+  { label: "خانه", href: "/" },
+  { label: "خدمات سایان" },
+];
 
 export default function ServicesPage() {
   return (
-    <div className="services-page">
+    <main className="archive-project">
       <div className="border-gray-3 border-y-[1px] bg-black-2 p-4 mb-8 [&_p]:flex">
-        <Breadcrumb items={[{ label: "خانه", href: "/" }, { label: "خدمات سایان" }]} />
+        <Breadcrumb items={breadcrumbItems} />
       </div>
-      <PageHero
-        eyebrow="SERVICES"
-        title="خدمات سایان"
-        description="در نسخه وردپرس، این صفحه از بایگانی `service` با فیلدهای ACF برای آیکون و توضیحات تشکیل شده است."
-      />
-      <div className="bg-white py-16">
-        <div className="container mx-auto max-w-6xl px-4">
-          <div className="grid gap-6 md:grid-cols-3">
-            {services.map((service) => (
-              <article key={service.slug} className="flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6">
-                <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-slate-900">{service.title}</h3>
-                  <p className="text-sm text-slate-600">{service.description}</p>
-                  <ul className="space-y-2 text-sm text-slate-600">
-                    {service.highlights.map((highlight) => (
-                      <li key={highlight} className="flex items-center gap-2">
-                        <span className="text-cyan-500">•</span>
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <Link href={`/services/${service.slug}`} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-cyan-600">
-                  مشاهده جزئیات
-                  <span aria-hidden>→</span>
-                </Link>
-              </article>
-            ))}
+
+      <section className="flex flex-col justify-center items-center p-8">
+        <div className="bubble" aria-hidden>
+          <div className="bubble-orange">
+            <span className="orange" />
+          </div>
+          <div className="bubble-red">
+            <span className="red" />
+          </div>
+          <div className="bubble-blue">
+            <span className="blue" />
+          </div>
+          <div className="bubble-green">
+            <span className="green" />
+          </div>
+          <div className="bubble-pink">
+            <span className="pink" />
+          </div>
+          <div className="bubble-grey">
+            <span className="grey" />
           </div>
         </div>
+        <img src="/wp-assets/imgs/service.png" alt="خدمات سایان" />
+        <div className="flex flex-col justify-center items-center gap-4 text-center">
+          <h1 className="h1">خدمات سایان</h1>
+          <p className="h5">مشاهده خدمات</p>
+          <ScrollDown />
+        </div>
+      </section>
+
+      <div className="w-full">
+        <div className="bubble-service" aria-hidden>
+          <div className="bubble-fixed" id="fixed_bubble" />
+        </div>
+        <div className="service-pages container">
+          {services.map((service) => (
+            <ServiceArchiveCard key={service.slug} service={service} />
+          ))}
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
