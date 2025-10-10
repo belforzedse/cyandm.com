@@ -140,13 +140,32 @@ a:hover {
   @apply inline-flex items-center gap-2 rounded-full border border-[color:var(--border)] px-4 py-2 text-xs font-medium uppercase tracking-widest text-[color:var(--text-muted)];
 }
 
-.scroll-indicator {
-  @apply relative flex flex-col items-center gap-2 text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)];
+.scroll-down {
+  @apply flex flex-col items-center justify-center;
 }
 
-.scroll-indicator::after {
-  content: "";
-  @apply block h-12 w-px rounded-full bg-gradient-to-b from-[color:var(--primary)] to-transparent;
+.scroll-down:hover i {
+  transform: translateY(0.5rem);
+}
+
+.scroll-down div {
+  @apply flex flex-col items-center pt-3;
+}
+
+.scroll-down div i {
+  color: var(--scroll-color, var(--primary));
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: -1rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.scroll-down div i:nth-child(1) {
+  transition-delay: 0.025s;
+}
+
+.scroll-down div i:nth-child(2) {
+  transition-delay: 0.05s;
 }
 
 main {
