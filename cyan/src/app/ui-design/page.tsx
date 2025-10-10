@@ -1,16 +1,20 @@
-﻿"use client";
+"use client";
 
-import Link from "next/link";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { useRef } from "react";
+import type { Swiper as SwiperType } from "swiper";
 import { Mousewheel, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 
 import { Breadcrumb } from "../../components/Breadcrumb";
-import { Bubbles } from "../../components/Bubbles";
-import { ScrollDown } from "../../components/ScrollDown";
 import { useModal } from "../../components/ModalProvider";
-import { landingSections } from "../../data/global";
+import { ServiceContactSlide } from "../../components/services/ServiceContactSlide";
+import { ServiceFAQSlide } from "../../components/services/ServiceFAQSlide";
+import { ServiceFooterNav } from "../../components/services/ServiceFooterNav";
+import { ServiceHeroSlide } from "../../components/services/ServiceHeroSlide";
+import { ServicePortfolioSlide } from "../../components/services/ServicePortfolioSlide";
+import { contact, faqs, projects, services } from "../../data/global";
 
 const breadcrumbItems = [
   { label: "خانه", href: "/" },
@@ -46,10 +50,22 @@ const workSteps = [
   },
 ];
 
-const uiSections = landingSections["ui-design"] ?? [];
+const service = services.find((item) => item.slug === "ui-design");
 
 export default function UIDesignPage() {
   const { open } = useModal();
+  const swiperRef = useRef<SwiperType>();
+
+  const goToSlide = (index: number) => {
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(index);
+    }
+  };
+
+  const workStepsStartIndex = 1;
+  const portfolioIndex = workStepsStartIndex + workSteps.length;
+  const faqIndex = portfolioIndex + 1;
+  const contactIndex = faqIndex + 1;
 
   return (
     <main className="relative min-h-screen pb-20">
@@ -65,26 +81,25 @@ export default function UIDesignPage() {
         mousewheel
         pagination={{ clickable: true }}
         modules={[Mousewheel, Pagination]}
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+        }}
       >
-        <SwiperSlide>
-          <section className="relative isolate flex min-h-[75vh] flex-col items-center justify-center overflow-hidden py-24 text-center">
-            <Bubbles variant="violet" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(255,200,6,0.16),transparent_70%)]" aria-hidden />
-            <div className="relative z-10 flex flex-col items-center gap-6 px-6">
-              <span className="badge">سرویس طراحی رابط کاربری</span>
-              <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl">
-                تجربه‌ای که کاربر عاشقش می‌شود
-              </h1>
-              <p className="max-w-2xl text-sm leading-8 text-[color:var(--text-muted)]">
-                طراحی UI در سایان یعنی ترکیب زیبایی، دسترسی‌پذیری و تحقق اهداف کسب‌وکار در هر پیکسل.
-              </p>
-              <div className="flex flex-col items-center gap-4 sm:flex-row">
-                <button type="button" className="primary-btn" onClick={() => open("make-project")}>شروع طراحی</button>
-                <ScrollDown label="مشاهده مراحل" />
-              </div>
-            </div>
-          </section>
-        </SwiperSlide>
+        <ServiceHeroSlide
+          eyebrow="سرویس طراحی رابط کاربری"
+          title="تجربه‌ای که کاربر عاشقش می‌شود"
+          description={
+            service?.description ??
+            "طراحی UI در سایان یعنی ترکیب زیبایی، دسترسی‌پذیری و تحقق اهداف کسب‌وکار در هر پیکسل."
+          }
+          gradient="radial-gradient(circle at bottom, rgba(255,200,6,0.16), transparent 70%)"
+          bubbleVariant="violet"
+          bottomFireVariant={["orange", "redSecondary"]}
+          primaryAction={{ label: "شروع طراحی", onClick: () => open("make-project") }}
+          secondaryAction={{ label: "ارسال شرح پروژه", href: "/contact" }}
+          scrollLabel="مشاهده مراحل"
+          onScrollClick={() => goToSlide(workStepsStartIndex)}
+        />
 
         {workSteps.map((step, index) => (
           <SwiperSlide key={step.title}>
@@ -103,54 +118,31 @@ export default function UIDesignPage() {
           </SwiperSlide>
         ))}
 
-        {uiSections.map((section) => (
-          <SwiperSlide key={section.id}>
-            <section className="flex min-h-[60vh] flex-col justify-center py-20">
-              <div className="container grid gap-10 lg:grid-cols-[1.1fr_1fr]">
-                <div className="space-y-4">
-                  <span className="badge">فرایند طراحی</span>
-                  <h3 className="text-2xl font-semibold text-white lg:text-3xl">{section.title}</h3>
-                  <p className="text-sm leading-7 text-[color:var(--text-muted)]">{section.description}</p>
-                  {section.bullets && (
-                    <ul className="grid gap-2 text-sm text-[color:var(--text-muted)]">
-                      {section.bullets.map((bullet) => (
-                        <li key={bullet} className="flex items-center gap-3">
-                          <span className="inline-flex h-2 w-2 rounded-full bg-[color:var(--primary)]" />
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-                {section.media && (
-                  <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[color:var(--border)] bg-[color:var(--surface)]/60">
-                    <img src={section.media.src} alt={section.media.alt ?? section.title} className="h-full w-full object-cover" />
-                  </div>
-                )}
-              </div>
-            </section>
-          </SwiperSlide>
-        ))}
+        <ServicePortfolioSlide
+          title="نگاهی به پروژه‌های طراحی UI سایان"
+          description="این نمونه‌ها در نسخه اصلی از پست تایپ پروژه‌ها بارگذاری می‌شوند. در نسخه هدلس، داده‌های ثابت `global.ts` آن را پر می‌کند."
+          projects={projects}
+        />
 
-        <SwiperSlide>
-          <section className="relative flex min-h-[60vh] flex-col items-center justify-center overflow-hidden py-24 text-center">
-            <Bubbles variant="sunset" />
-            <div className="relative z-10 flex flex-col items-center gap-6 px-6">
-              <span className="badge">همکاری در طراحی</span>
-              <h2 className="text-3xl font-semibold text-white lg:text-4xl">جلسه رایگان بازطراحی تجربه کاربری</h2>
-              <p className="max-w-xl text-sm leading-7 text-[color:var(--text-muted)]">
-                با هم روی جریان کاربر، کامپوننت‌ها و تحویل به تیم توسعه توافق می‌کنیم تا پروژه بدون اصطکاک جلو بره.
-              </p>
-              <div className="flex flex-col items-center gap-4 sm:flex-row">
-                <a href="tel:+982128428248" className="primary-btn">صحبت با طراح ارشد</a>
-                <Link href="/contact" className="secondary-btn">
-                  ارسال شرح پروژه
-                </Link>
-              </div>
-            </div>
-          </section>
-        </SwiperSlide>
+        <ServiceFAQSlide
+          title="پرسش‌های پرتکرار مشتریان طراحی UI"
+          faqs={faqs}
+          accentImage="/wp-assets/imgs/services/ui-faq.jpg"
+        />
+
+        <ServiceContactSlide
+          title="برای بازطراحی رابط کاربری آماده‌ایم"
+          slogan="گفتگو را شروع کن تا درباره جریان کاربری، سیستم دیزاین و تحویل به تیم توسعه صحبت کنیم."
+          contact={contact}
+        />
       </Swiper>
+
+      <ServiceFooterNav
+        onWorkStepsClick={() => goToSlide(workStepsStartIndex)}
+        onPortfolioClick={() => goToSlide(portfolioIndex)}
+        onFaqClick={() => goToSlide(faqIndex)}
+        onContactClick={() => goToSlide(contactIndex)}
+      />
     </main>
   );
 }
