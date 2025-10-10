@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import gsap from "gsap";
+import { EasePack, ScrollToPlugin, ScrollTrigger } from "gsap/all";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Thumbs } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
@@ -23,24 +25,148 @@ const planets = [
 
 const starIcons = Array.from({ length: 5 });
 
+const usePreloaderAnimation = () => {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const isLargeScreen = window.matchMedia("(min-width: 1024px)");
+    if (!isLargeScreen.matches) return;
+
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, EasePack);
+
+    const preloader = document.querySelector(".preloader");
+    if (!preloader) return;
+
+    const toggleShow = (element: Element | null, shouldShow: boolean) => {
+      if (!element) return;
+      element.classList.toggle("visible", shouldShow);
+      element.classList.toggle("pointer-all", shouldShow);
+    };
+
+    const toggleFadeOff = (element: Element | null, shouldFadeOff: boolean) => {
+      element?.classList.toggle("fade-off", shouldFadeOff);
+    };
+
+    const listeners: Array<() => void> = [];
+    let scrollTriggerInstance: ReturnType<typeof ScrollTrigger.create> | null = null;
+
+    const ctx = gsap.context(() => {
+      const clockSection = document.querySelector(".clock-section");
+      const bottomFire = document.querySelector(".bottom-fire");
+      const multiPlanetSection = document.querySelector(".multi-planet");
+
+      const clockSpinTL = gsap.timeline({ repeat: -1 });
+      clockSpinTL.to(".clock", { duration: 5, ease: "none", "--rotate": 360 });
+
+      const slide2ContentTL = gsap.timeline();
+      document
+        .querySelectorAll<HTMLElement>(".clock-section .content .mask-wrapper > *")
+        .forEach((element, index) => {
+          slide2ContentTL.fromTo(
+            element,
+            {
+              y: 100,
+              opacity: 0,
+              duration: 1,
+              ease: "power1.out",
+              delay: index * 5,
+            },
+            {
+              y: 0,
+              opacity: 1,
+            },
+          );
+        });
+
+      const multiPlanetTL = gsap.timeline();
+      multiPlanetTL.to(".multi-planet", { opacity: 1 });
+      multiPlanetTL.to(".light-planet", { opacity: 1 });
+      gsap.utils.toArray<HTMLElement>(".multi-planet .planet-con").forEach((planet) => {
+        multiPlanetTL.from(planet, { y: 50, opacity: 0 });
+      });
+      multiPlanetTL.fromTo(
+        ".multi-planet .scroll-down",
+        { opacity: 0, y: 100 },
+        { opacity: 1, y: 0 },
+      );
+
+      const endClock = () => {
+        toggleShow(clockSection, true);
+        toggleFadeOff(bottomFire, true);
+        clockSpinTL.timeScale(0.05);
+      };
+
+      const backToStart = () => {
+        clockSpinTL.timeScale(1);
+        toggleShow(clockSection, false);
+        toggleFadeOff(bottomFire, false);
+      };
+
+      const startMultiPlanet = () => {
+        toggleShow(multiPlanetSection, true);
+      };
+
+      const preloaderTL = gsap.timeline({ defaults: { duration: 1 } });
+      preloaderTL.addLabel("start");
+      preloaderTL.to(".clock", { scale: 18, onComplete: endClock });
+      preloaderTL.addLabel("endClock");
+      preloaderTL.add(slide2ContentTL, "endClock");
+      preloaderTL.addLabel("endShowingContent");
+      preloaderTL.to(".clock", { borderRadius: 0 });
+      preloaderTL
+        .to(".pre-clock , .clock-section, .clock", {
+          y: () => window.innerHeight * -1,
+          duration: 3,
+          onComplete: startMultiPlanet,
+        })
+        .addLabel("endOfSlide2");
+      preloaderTL.addLabel("startMultiPlanet").add(multiPlanetTL).addLabel("endMultiPlanet");
+
+      scrollTriggerInstance = ScrollTrigger.create({
+        animation: preloaderTL,
+        trigger: ".preloader",
+        pin: true,
+        scrub: 1,
+        start: "+=1",
+        end: "+=3000",
+        onLeaveBack: backToStart,
+      });
+
+      const attachClickToLabel = (selector: string, label: string) => {
+        const element = document.querySelector(selector);
+        if (!element) return;
+
+        const handler = () => {
+          const scrollPosition = preloaderTL.scrollTrigger?.labelToScroll(label);
+          if (scrollPosition == null) return;
+
+          gsap.to(window, {
+            duration: 5,
+            scrollTo: scrollPosition,
+            ease: "power1.inOut",
+          });
+        };
+
+        element.addEventListener("click", handler);
+        listeners.push(() => element.removeEventListener("click", handler));
+      };
+
+      attachClickToLabel(".pre-clock .scroll-down", "endShowingContent");
+      attachClickToLabel("#letsGo", "endOfSlide2");
+    }, preloader);
+
+    return () => {
+      listeners.forEach((cleanup) => cleanup());
+      scrollTriggerInstance?.kill();
+      ctx.revert();
+    };
+  }, []);
+};
+
 export default function Home() {
   const { hero, projects, testimonials, brands, services, team, posts, faqs } = homePage;
-  const clockRef = useRef<HTMLDivElement>(null);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
-  // Clock rotation animation
-  useEffect(() => {
-    let rotation = 0;
-    const clockElement = clockRef.current;
-    if (!clockElement) return;
-
-    const interval = setInterval(() => {
-      rotation = (rotation + 6) % 360;
-      clockElement.style.setProperty("--rotate", `${rotation}deg`);
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, []);
+  usePreloaderAnimation();
 
   // Service cards mouse follow effect
   useEffect(() => {
@@ -85,7 +211,7 @@ export default function Home() {
             <p className="h1">حواست باشه</p>
             <h1>
               زمــــان داره به سرعـــــــــــــــــــــت می‌گذره
-              <div ref={clockRef} className="clock" />
+              <div className="clock" />
             </h1>
             <p className="h1">از کسب و کار عقب نمونی</p>
           </div>
