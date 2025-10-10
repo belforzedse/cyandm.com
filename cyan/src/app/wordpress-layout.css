@@ -1,78 +1,5 @@
 /* ===== EXACT HOMEPAGE LAYOUT FROM WORDPRESS compiled.css ===== */
 
-/* Peyda Font - from WordPress compiled.css lines 5121-5192 */
-@font-face {
-  font-family: "Peyda";
-  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-Thin.woff2");
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Peyda";
-  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-ExtraLight.woff2");
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Peyda";
-  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-Light.woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Peyda";
-  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-Regular.woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Peyda";
-  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-Medium.woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Peyda";
-  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-SemiBold.woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Peyda";
-  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-Bold.woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Peyda";
-  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-ExtraBold.woff2");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Peyda";
-  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-Black.woff2");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* Reset & Global Styles - from WordPress compiled.css lines 1-30 */
 *,
 *::after,
@@ -121,7 +48,7 @@ body {
   color: #E0E0E0 !important;
   overflow: hidden;
   isolation: isolate;
-  font-family: "peyda" !important;
+  font-family: var(--font-peyda), sans-serif !important;
   font-style: normal;
   font-variant-ligatures: discretionary-ligatures;
   font-feature-settings: "ss01" 1, "salt" 0;
@@ -169,7 +96,7 @@ html:has(body[data-popup-open=true]) {
 /* Typography - from WordPress compiled.css lines 5216-5273 */
 h1,
 .h1 {
-  font-family: "peyda";
+  font-family: var(--font-peyda), sans-serif;
   font-style: normal;
   font-variant-ligatures: discretionary-ligatures;
   font-feature-settings: "ss01" 1, "salt" 0;
@@ -190,7 +117,7 @@ h1,
 
 h2,
 .h2 {
-  font-family: "peyda";
+  font-family: var(--font-peyda), sans-serif;
   font-style: normal;
   font-variant-ligatures: discretionary-ligatures;
   font-feature-settings: "ss01" 1, "salt" 0;
@@ -202,7 +129,7 @@ h2,
 
 h3,
 .h3 {
-  font-family: "peyda";
+  font-family: var(--font-peyda), sans-serif;
   font-style: normal;
   font-variant-ligatures: discretionary-ligatures;
   font-feature-settings: "ss01" 1, "salt" 0;
@@ -261,7 +188,7 @@ main > section:not(:first-child) {
   transition: color 0.3s ease-in-out;
   color: inherit;
   cursor: pointer;
-  font-family: "peyda";
+  font-family: var(--font-peyda), sans-serif;
   font-style: normal;
   font-variant-ligatures: discretionary-ligatures;
   font-feature-settings: "ss01" 1, "salt" 0;
@@ -309,7 +236,7 @@ main > section:not(:first-child) {
   transition: color 0.3s ease-in-out;
   color: inherit;
   cursor: pointer;
-  font-family: "peyda";
+  font-family: var(--font-peyda), sans-serif;
   font-style: normal;
   font-variant-ligatures: discretionary-ligatures;
   font-feature-settings: "ss01" 1, "salt" 0;
