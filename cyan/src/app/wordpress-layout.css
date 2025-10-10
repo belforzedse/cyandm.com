@@ -993,6 +993,31 @@ header .left-col {
   height: 100vh;
 }
 
+.preloader-wrapper {
+  width: 100%;
+}
+
+@media screen and (min-width: 1024px) {
+  .preloader-wrapper {
+    height: calc(100vh + 3000px);
+  }
+
+  .preloader-wrapper .preloader {
+    position: sticky;
+    top: 0;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .preloader-wrapper {
+    height: auto;
+  }
+
+  .preloader-wrapper .preloader {
+    position: relative;
+  }
+}
+
 .preloader > * {
   position: absolute;
   translate: 0 calc(-1 * var(--header-height));
@@ -1096,6 +1121,7 @@ header .left-col {
   overflow: hidden;
   z-index: 20;
   scale: 1;
+  animation: clock-spin 5s linear infinite;
 }
 
 /* Clock hand - CRITICAL for visual match */
@@ -1109,6 +1135,15 @@ header .left-col {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: calc(var(--width) / 2) solid hsl(173, 100%, 56%);
+}
+
+@keyframes clock-spin {
+  from {
+    --rotate: 0deg;
+  }
+  to {
+    --rotate: 360deg;
+  }
 }
 
 .clock-section {
