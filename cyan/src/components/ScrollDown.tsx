@@ -1,24 +1,43 @@
-﻿import type { CSSProperties } from "react";
+import type { CSSProperties, KeyboardEvent } from "react";
 
-type ScrollDownProps = {
-  color?: string;
-  label?: string;
-  onClick?: () => void;
+type ScrollDownStyle = CSSProperties & {
+  "--scroll-color"?: string;
 };
 
-export function ScrollDown({ color, label = "اسکرول کن", onClick }: ScrollDownProps) {
-  const style = color
-    ? ({
-        color,
-      } satisfies CSSProperties)
+type ScrollDownProps = {
+  label?: string;
+  onClick?: () => void;
+  scroll_color?: string;
+};
+
+export function ScrollDown({ label, onClick, scroll_color }: ScrollDownProps) {
+  const style: ScrollDownStyle | undefined = scroll_color
+    ? { "--scroll-color": scroll_color }
     : undefined;
 
+  const handleKeyDown = (event: KeyboardEvent<HTMLSpanElement>) => {
+    if (!onClick) return;
+
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      onClick();
+    }
+  };
+
   return (
-    <button type="button" className="scroll-indicator" style={style} onClick={onClick}>
-      <span>{label}</span>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="m6 9 6 6 6-6" />
-      </svg>
-    </button>
+    <span
+      className="scroll-down cursor-pointer"
+      style={style}
+      onClick={onClick}
+      onKeyDown={handleKeyDown}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      aria-label={label}
+    >
+      <div>
+        <i className="icon-arrow" />
+        <i className="icon-arrow" />
+      </div>
+    </span>
   );
 }
