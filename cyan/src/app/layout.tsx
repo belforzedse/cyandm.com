@@ -35,17 +35,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl" suppressHydrationWarning>
-      <body className={`${peyda.variable} min-h-screen bg-[color:var(--background)] text-[color:var(--text)]`}>
-        <div id="preloader">
-          <div style={{ display: 'flex', gap: '30px' }}>
-            <div className="loader-eye"></div>
-            <div className="loader-eye"></div>
-          </div>
+      <body className={`${peyda.variable} rtl home`}>
+        <div className="preloader-div">
+          <div className="loader"></div>
         </div>
         <Preloader />
         <ModalProvider>
           <Header />
-          <main>{children}</main>
+          {children}
           <Footer />
         </ModalProvider>
       </body>

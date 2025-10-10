@@ -1,5 +1,411 @@
 /* ===== EXACT HOMEPAGE LAYOUT FROM WORDPRESS compiled.css ===== */
 
+/* Peyda Font - from WordPress compiled.css lines 5121-5192 */
+@font-face {
+  font-family: "Peyda";
+  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-Thin.woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Peyda";
+  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-ExtraLight.woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Peyda";
+  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-Light.woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Peyda";
+  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-Regular.woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Peyda";
+  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-Medium.woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Peyda";
+  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-SemiBold.woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Peyda";
+  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-Bold.woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Peyda";
+  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-ExtraBold.woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Peyda";
+  src: url("/wp-assets/fonts/peyda/woff2/PeydaWebFaNum-Black.woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Reset & Global Styles - from WordPress compiled.css lines 1-30 */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+i {
+  aspect-ratio: 1;
+  display: inline-block;
+}
+
+/* Container - from WordPress compiled.css lines 1903-1911 */
+.container {
+  max-width: 1440px !important;
+  margin-inline: auto;
+}
+
+@media (width <= 1440px) {
+  .container {
+    padding-inline: 1rem;
+  }
+}
+
+/* Body - from WordPress compiled.css lines 1913-1946, 5193-5214 */
+body {
+  position: relative;
+  background-color: hsl(227, 44%, 6%) !important;
+  color: #E0E0E0 !important;
+  overflow: hidden;
+  isolation: isolate;
+  font-family: "peyda" !important;
+  font-style: normal;
+  font-variant-ligatures: discretionary-ligatures;
+  font-feature-settings: "ss01" 1, "salt" 0;
+  letter-spacing: 0.5px;
+  font-size: 1rem !important;
+  font-weight: 400;
+  line-height: 2.25rem;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    line-height: 2rem;
+  }
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: inherit;
+  border-radius: inherit;
+  border: inherit;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+  transition: opacity 0.3s ease-in;
+  opacity: 0;
+  pointer-events: none;
+}
+
+body[data-popup-open=true]::after {
+  opacity: 1;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+html:has(body[data-popup-open=true]) {
+  overflow: hidden;
+}
+
+/* Typography - from WordPress compiled.css lines 5216-5273 */
+h1,
+.h1 {
+  font-family: "peyda";
+  font-style: normal;
+  font-variant-ligatures: discretionary-ligatures;
+  font-feature-settings: "ss01" 1, "salt" 0;
+  letter-spacing: 0.5px;
+  font-size: 2.25rem !important;
+  font-weight: 700;
+  line-height: normal;
+}
+
+@media screen and (max-width: 480px) {
+  h1,
+  .h1 {
+    font-size: 1.5rem !important;
+    line-height: 2.25rem;
+    font-weight: bold;
+  }
+}
+
+h2,
+.h2 {
+  font-family: "peyda";
+  font-style: normal;
+  font-variant-ligatures: discretionary-ligatures;
+  font-feature-settings: "ss01" 1, "salt" 0;
+  letter-spacing: 0.5px;
+  font-size: 1.5rem !important;
+  line-height: 2.25rem;
+  font-weight: bold;
+}
+
+h3,
+.h3 {
+  font-family: "peyda";
+  font-style: normal;
+  font-variant-ligatures: discretionary-ligatures;
+  font-feature-settings: "ss01" 1, "salt" 0;
+  letter-spacing: 0.5px;
+  font-size: 1.25rem !important;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 768px) {
+  h3,
+  .h3 {
+    font-size: 1rem !important;
+    font-weight: 700;
+  }
+}
+
+/* Section Spacing & Components - from WordPress compiled.css lines 1948-1975 */
+main > section:not(:first-child) {
+  margin-block-start: 4rem;
+}
+
+.section-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+  flex-wrap: nowrap;
+  gap: 0;
+  margin-block-end: 1.25rem;
+}
+
+@media screen and (max-width: 768px) {
+  .section-title .primary-btn {
+    display: none;
+  }
+}
+
+.section-view-all {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .section-view-all {
+    display: block;
+  }
+}
+
+/* Buttons - from WordPress compiled.css lines 169-300 */
+.primary-btn {
+  border-radius: 62.5rem;
+  border: 1px solid var(--start-color, #1dbacf);
+  background: transparent;
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  transition: color 0.3s ease-in-out;
+  color: inherit;
+  cursor: pointer;
+  font-family: "peyda";
+  font-style: normal;
+  font-variant-ligatures: discretionary-ligatures;
+  font-feature-settings: "ss01" 1, "salt" 0;
+  letter-spacing: 0.5px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 2rem;
+  isolation: isolate;
+  padding: 0.5rem 2rem;
+  white-space: nowrap;
+}
+
+.primary-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: linear-gradient(var(--start-color, #1dbacf), var(--end-color, #0d8bff));
+  z-index: -1;
+  transition: translate 0.3s ease-in-out;
+  translate: 0 100%;
+  border: none;
+  border-radius: 0;
+}
+
+.primary-btn:hover,
+.primary-btn[data-active=true] {
+  color: hsl(227, 44%, 6%);
+}
+
+.primary-btn:hover::after,
+.primary-btn[data-active=true]::after {
+  translate: 0;
+}
+
+.secondary-btn {
+  border-radius: 62.5rem;
+  border: 1px solid #fff;
+  background: transparent;
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  transition: color 0.3s ease-in-out;
+  color: inherit;
+  cursor: pointer;
+  font-family: "peyda";
+  font-style: normal;
+  font-variant-ligatures: discretionary-ligatures;
+  font-feature-settings: "ss01" 1, "salt" 0;
+  letter-spacing: 0.5px;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 2rem;
+  isolation: isolate;
+  padding: 0.75rem 4rem;
+}
+
+.secondary-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #fff;
+  z-index: -1;
+  transition: translate 0.3s ease-in-out;
+  translate: 0 100%;
+  border: none;
+  border-radius: 0;
+}
+
+.secondary-btn:hover,
+.secondary-btn[data-active=true] {
+  color: hsl(227, 44%, 6%);
+}
+
+.secondary-btn:hover::after,
+.secondary-btn[data-active=true]::after {
+  translate: 0;
+}
+
+.icon-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
+  flex-wrap: nowrap;
+  gap: 0;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  padding: 0.5rem;
+  background: linear-gradient(var(--start-color), var(--end-color));
+  color: hsl(227, 44%, 6%);
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+}
+
+.icon-btn::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-color: hsl(227, 44%, 6%);
+  border-radius: 50%;
+  z-index: -1;
+  transition: 0.3s ease-in-out;
+  scale: 0;
+}
+
+.icon-btn:hover {
+  color: #E0E0E0;
+}
+
+.icon-btn:hover::after {
+  scale: 1;
+}
+
+.search-link {
+  border: 1px solid #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
+  flex-wrap: nowrap;
+  gap: 0;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  padding: 0.5rem;
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+  transition: all 0.6s ease-in-out;
+}
+
+.search-link:hover {
+  border: 1px solid #15eded;
+}
+
 /* Icon Font - from WordPress compiled.css lines 4838-5050 */
 @font-face {
   font-family: "cyan-icon";
@@ -547,6 +953,41 @@ header .left-col {
 }
 
 /* Hero/Preloader sections */
+.preloader-div {
+  width: 100%;
+  height: 100vh;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background-color: hsl(227, 44%, 6%);
+  z-index: 1111111111;
+  transition: all 0.8s ease-in-out;
+}
+
+.preloader-div .loader {
+  display: inline-flex;
+  gap: 30px;
+}
+
+.preloader-div .loader:before,
+.preloader-div .loader:after {
+  content: "";
+  height: 30px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: linear-gradient(hsl(0, 0%, 46%) 0 0) top/100% 0% no-repeat, radial-gradient(farthest-side, hsl(0, 0%, 46%) 95%, rgba(0, 0, 0, 0)) 50%/8px 8px no-repeat #fff;
+  animation: l9 1s infinite ease-in;
+}
+
+@keyframes l9 {
+  100% {
+    background-position: bottom, 50% calc(100% - 8px);
+    background-size: 100% 100%, 8px 8px;
+  }
+}
+
 .preloader {
   position: relative;
   height: 100vh;
@@ -657,6 +1098,7 @@ header .left-col {
   scale: 1;
 }
 
+/* Clock hand - CRITICAL for visual match */
 .clock::after {
   content: "";
   position: absolute;
