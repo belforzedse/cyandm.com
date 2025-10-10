@@ -89,6 +89,17 @@ export type ContactDetails = {
   phoneNumbers: string[];
   email: string;
   socials: Array<{ label: string; url: string; icon: string }>;
+  footerImage: string;
+};
+
+export type FooterMenuLink = {
+  label: string;
+  href: string;
+};
+
+export type FooterContent = {
+  servicesMenu: FooterMenuLink[];
+  blogMenu: FooterMenuLink[];
 };
 
 export type LandingPageSection = {
