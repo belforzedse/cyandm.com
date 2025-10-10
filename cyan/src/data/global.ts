@@ -359,8 +359,16 @@ export const footerContent: FooterContent = {
 
 export const contact: ContactDetails = {
   address: "تهران، خیابان ولیعصر، پلاک ۱۲۰، واحد ۷",
-  mapEmbed:
-    "<iframe src=\"https://maps.google.com/...\" width=\"100%\" height=\"320\" style=\"border:0;\" loading=\"lazy\"></iframe>",
+  mapEmbed: `
+    <iframe
+      title="موقعیت سایان دیجیتال مارکتینگ"
+      src="https://maps.google.com/maps?width=600&height=450&hl=fa&q=Tehran%20Valiasr%20Street%20120%20Unit%207%20(Cyan%20Digital%20Marketing)&t=&z=15&ie=UTF8&iwloc=B&output=embed"
+      style="border:0; width:100%; height:100%; min-height:320px;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  `.trim(),
   phoneNumbers: ["021-12345678", "021-87654321", "021-28428248"],
   email: "hello@cyandm.com",
   socials: [

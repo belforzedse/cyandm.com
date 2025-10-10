@@ -28,7 +28,10 @@ export default function ContactPage() {
                 {contact.email}
               </a>
             </div>
-            <div className="mt-6" dangerouslySetInnerHTML={{ __html: contact.mapEmbed }} />
+            <div
+              className="mt-6 overflow-hidden rounded-[32px] border border-slate-200 shadow-[0_18px_80px_rgba(10,8,30,0.08)] [&_iframe]:h-[360px] [&_iframe]:w-full"
+              dangerouslySetInnerHTML={{ __html: contact.mapEmbed }}
+            />
           </section>
 
           <section className="rounded-3xl border border-dashed border-cyan-200 bg-cyan-50/80 p-6 text-sm text-cyan-900">

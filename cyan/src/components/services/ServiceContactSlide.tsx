@@ -73,9 +73,9 @@ export function ServiceContactSlide({ title, slogan, contact, primaryCta }: Serv
             </div>
           </div>
 
-          <div className="hidden overflow-hidden rounded-[var(--radius-lg)] border border-[color:var(--border)] bg-[color:var(--surface)]/40 lg:block">
+          <div className="hidden min-h-[320px] overflow-hidden rounded-[var(--radius-lg)] border border-[color:var(--border)] bg-[color:var(--surface)]/40 lg:block">
             <div
-              className="h-full w-full"
+              className="h-full w-full [&_iframe]:h-full [&_iframe]:w-full"
               dangerouslySetInnerHTML={{ __html: contact.mapEmbed }}
             />
           </div>

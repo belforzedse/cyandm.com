@@ -38,7 +38,10 @@ export function Footer() {
           <div className="column-3 flex max-w-60 flex-col gap-8">
             <span className="footer-title h4">آدرس</span>
             <p className="footer-address-text leading-[2.5]">{address}</p>
-            <div className="footer-address-map" dangerouslySetInnerHTML={{ __html: mapEmbed }} />
+            <div
+              className="footer-address-map min-h-[320px] [&_iframe]:h-full [&_iframe]:w-full"
+              dangerouslySetInnerHTML={{ __html: mapEmbed }}
+            />
           </div>
           <div className="column-4">
             <span className="footer-title h4">شماره تماس</span>
