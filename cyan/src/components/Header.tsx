@@ -406,11 +406,11 @@ export function Header({
           یه پروژه بساز
         </button>
         <Link href="/search" className="search-link" aria-label="جستجو">
-          <SearchIcon className="icon-search" />
+          <i className="icon-search"></i>
         </Link>
         {phoneNumber && (
           <a href={`tel:${phoneNumber}`} className="icon-btn" aria-label="تماس">
-            <PhoneIcon className="icon-call" />
+            <i className="icon-call"></i>
           </a>
         )}
       </div>

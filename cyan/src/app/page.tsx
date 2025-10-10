@@ -28,6 +28,31 @@ export default function Home() {
   const clockRef = useRef<HTMLDivElement>(null);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
+  // CSS Variables - matches WordPress variable.js
+  useEffect(() => {
+    const setCssVariables = () => {
+      const header = document.querySelector("header");
+      const footer = document.querySelector("footer");
+      const container = document.querySelector(".container");
+      const root = document.documentElement;
+
+      if (header && container) {
+        const headerHeight = header.getBoundingClientRect().height;
+        const footerHeight = footer ? footer.getBoundingClientRect().height : 0;
+        const containerWidth = container.clientWidth;
+        const marginFromSide = (window.innerWidth - containerWidth) / 2;
+
+        root.style.setProperty("--header-height", `${headerHeight}px`);
+        root.style.setProperty("--footer-height", `${footerHeight}px`);
+        root.style.setProperty("--margin-from-side", `${marginFromSide}px`);
+      }
+    };
+
+    setCssVariables();
+    window.addEventListener("resize", setCssVariables);
+    return () => window.removeEventListener("resize", setCssVariables);
+  }, []);
+
   // Clock rotation animation
   useEffect(() => {
     let rotation = 0;
