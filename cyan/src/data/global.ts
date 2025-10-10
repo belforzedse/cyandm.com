@@ -361,12 +361,24 @@ export const contact: ContactDetails = {
   address: "تهران، خیابان ولیعصر، پلاک ۱۲۰، واحد ۷",
   mapEmbed:
     "<iframe src=\"https://maps.google.com/...\" width=\"100%\" height=\"320\" style=\"border:0;\" loading=\"lazy\"></iframe>",
-  phoneNumbers: ["021-12345678", "021-87654321"],
+  phoneNumbers: ["021-12345678", "021-87654321", "021-28428248"],
   email: "hello@cyandm.com",
   socials: [
-    { label: "اینستاگرام", url: "https://instagram.com/cyandm", icon: "instagram" },
-    { label: "لینکدین", url: "https://linkedin.com/company/cyandm", icon: "linkedin" },
-    { label: "تلگرام", url: "https://t.me/cyandm", icon: "telegram" },
+    {
+      label: "اینستاگرام",
+      url: "https://instagram.com/cyandm",
+      logo: "/wp-assets/imgs/socials/instagram.svg",
+    },
+    {
+      label: "لینکدین",
+      url: "https://linkedin.com/company/cyandm",
+      logo: "/wp-assets/imgs/socials/linkedin.svg",
+    },
+    {
+      label: "تلگرام",
+      url: "https://t.me/cyandm",
+      logo: "/wp-assets/imgs/socials/telegram.svg",
+    },
   ],
   footerImage: "/wp-assets/imgs/puzzle-image.png",
 };

@@ -88,7 +88,7 @@ export type ContactDetails = {
   mapEmbed: string;
   phoneNumbers: string[];
   email: string;
-  socials: Array<{ label: string; url: string; icon: string }>;
+  socials: Array<{ label: string; url: string; logo: string }>;
   footerImage: string;
 };
 
