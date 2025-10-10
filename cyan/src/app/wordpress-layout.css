@@ -12,6 +12,7 @@ header {
   position: relative;
   background-color: hsl(227, 44%, 6%);
   z-index: 4;
+  --header-height: 5.5rem;
 }
 
 header .right-col {
@@ -22,6 +23,20 @@ header .right-col {
   flex-wrap: nowrap;
   gap: 0;
   gap: 1rem;
+}
+
+header .right-col .mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  line-height: 0;
+}
+
+header .right-col .mobile-menu-toggle svg {
+  width: 44px;
+  height: 44px;
 }
 
 header .right-col .logo {
@@ -196,6 +211,157 @@ header .left-col {
 @media screen and (max-width: 768px) {
   header .left-col .primary-btn {
     display: none;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  header {
+    --header-height: 5rem;
+  }
+
+  header .right-col {
+    flex: 1;
+    justify-content: space-between;
+  }
+
+  header .right-col .mobile-menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  header .right-col .header-menu {
+    display: none;
+  }
+
+  header .left-col {
+    justify-content: flex-end;
+  }
+
+  header .mobile-menu {
+    display: block;
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: hsl(227, 44%, 6%);
+    padding: 1.5rem 1.5rem 3rem;
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.3s ease-in-out;
+    overflow-y: auto;
+    z-index: 90;
+  }
+
+  header .mobile-menu[data-active="true"] {
+    clip-path: inset(0 0 0 0);
+  }
+
+  header .mobile-menu .mobile-menu-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-block-end: 2rem;
+  }
+
+  header .mobile-menu .mobile-menu-actions .primary-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  header .mobile-menu .mobile-menu-actions .phone-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: hsla(0, 0%, 100%, 0.8);
+    border: 1px solid hsla(0, 0%, 100%, 0.12);
+    border-radius: 999px;
+    padding: 0.75rem 1.25rem;
+  }
+
+  header .mobile-menu .mobile-menu-actions .phone-link .icon-call {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  header .mobile-menu-nav .menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  header .mobile-menu-nav .menu > li {
+    padding: 1rem 0;
+    color: hsla(0, 0%, 100%, 0.65);
+  }
+
+  header .mobile-menu-nav .menu > li:not(:last-child) {
+    border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
+  }
+
+  header .mobile-menu-nav .menu > li.current-menu-item,
+  header .mobile-menu-nav .menu > li.current-menu-parent {
+    color: #e0e0e0;
+  }
+
+  header .mobile-menu-nav .menu > li .menu-link {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  header .mobile-menu-nav .menu > li .menu-link .submenu-indicator {
+    display: inline-flex;
+    width: 1.25rem;
+    height: 1.25rem;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  header .mobile-menu-nav .menu > li.menu-item-has-children .grid-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease, margin 0.3s ease;
+  }
+
+  header .mobile-menu-nav .menu > li.menu-item-has-children .grid-wrapper .sub-menu {
+    overflow: hidden;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  header .mobile-menu-nav .menu > li.menu-item-has-children .grid-wrapper .sub-menu li {
+    padding: 0.75rem 0;
+    padding-inline-start: 1rem;
+    color: hsla(0, 0%, 100%, 0.75);
+  }
+
+  header .mobile-menu-nav .menu > li.menu-item-has-children .grid-wrapper .sub-menu li:not(:last-child) {
+    border-bottom: 1px solid hsla(0, 0%, 100%, 0.12);
+  }
+
+  header .mobile-menu-nav .menu > li.menu-item-has-children .grid-wrapper .sub-menu li a {
+    color: inherit;
+  }
+
+  header .mobile-menu-nav .menu > li.menu-item-has-children[data-active="true"] .grid-wrapper {
+    grid-template-rows: 1fr;
+    margin-block-start: 0.75rem;
+  }
+
+  header .mobile-menu-nav .menu > li.menu-item-has-children[data-active="true"] .menu-link .submenu-indicator {
+    transform: rotate(180deg);
+    color: var(--start-color);
   }
 }
 
