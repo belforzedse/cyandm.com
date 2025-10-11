@@ -1,3 +1,5 @@
+"use client";
+
 import type { CSSProperties, KeyboardEvent } from "react";
 
 type ScrollDownStyle = CSSProperties & {

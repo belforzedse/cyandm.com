@@ -22,7 +22,7 @@ type HeaderProps = {
   endColor?: string;
 };
 
-type NavigationTree = NavigationItem & {
+type NavigationTree = Omit<NavigationItem, "children"> & {
   normalizedHref: string;
   children?: NavigationTree[];
 };
@@ -275,9 +275,9 @@ export function Header({
       };
     }
 
-    const interval = window.setInterval(updateHeight, 500);
+    const interval = setInterval(updateHeight, 500);
     return () => {
-      window.clearInterval(interval);
+      clearInterval(interval);
     };
   }, []);
 

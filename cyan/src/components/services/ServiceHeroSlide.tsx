@@ -24,8 +24,7 @@ type ServiceHeroSlideProps = {
   secondaryAction?: Action;
   scrollLabel?: string;
   onScrollClick?: () => void;
-  bottomFireVariant?: React.ComponentProps<typeof BottomFire>["variant"] |
-    React.ComponentProps<typeof BottomFire>["variant"][];
+  bottomFireVariant?: React.ComponentProps<typeof BottomFire>["variant"];
 };
 
 const isInternal = (href: string) => href.startsWith("/");
