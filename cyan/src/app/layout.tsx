@@ -36,9 +36,6 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl" suppressHydrationWarning>
       <body className={`${peyda.variable} rtl home`}>
-        <div id="preloader" className="preloader-div">
-          <div className="loader"></div>
-        </div>
         <Preloader />
         <ModalProvider>
           <Header />
