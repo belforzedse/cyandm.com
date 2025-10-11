@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 export function Preloader() {
   useEffect(() => {
-    const preloader = document.getElementById("preloader");
+    const preloader = document.querySelector(".preloader-div");
     if (!preloader) return;
 
     const handleLoad = () => {
@@ -20,8 +20,8 @@ export function Preloader() {
       window.addEventListener("load", handleLoad);
     }
 
-    // Fallback timeout
-    const timer = setTimeout(handleLoad, 4000);
+    // Fallback timeout to ensure preloader always hides
+    const timer = setTimeout(handleLoad, 3000);
 
     return () => {
       clearTimeout(timer);

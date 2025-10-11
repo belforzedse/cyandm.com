@@ -23,17 +23,23 @@ export const navigation: NavigationItem[] = [
     href: "/",
   },
   {
-    label: "خدمات",
-    href: "/services",
-    children: [
-      { label: "طراحی UI", href: "/ui-design" },
-      { label: "بازاریابی", href: "/marketing" },
-      { label: "سئو", href: "/seo" },
-      { label: "کمپین", href: "/landing" },
-    ],
+    label: "طراحی و توسعه وبسایت",
+    href: "/web-develope",
   },
   {
-    label: "پروژه‌ها",
+    label: "سئو",
+    href: "/seo",
+  },
+  {
+    label: "مشاوره کسب و کار",
+    href: "/branding",
+  },
+  {
+    label: "درباره سایان",
+    href: "/about-cyandm",
+  },
+  {
+    label: "پروژه ها",
     href: "/projects",
   },
   {
@@ -41,20 +47,8 @@ export const navigation: NavigationItem[] = [
     href: "/blog",
   },
   {
-    label: "تیم سایان",
-    href: "/team",
-  },
-  {
-    label: "درباره ما",
-    href: "/about",
-  },
-  {
-    label: "ارتباط با ما",
+    label: "تماس با ما",
     href: "/contact",
-  },
-  {
-    label: "سوالات متداول",
-    href: "/faq",
   },
 ];
 

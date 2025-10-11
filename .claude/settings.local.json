@@ -16,7 +16,18 @@
       "Bash(for i in 1 2 3 4 5)",
       "Bash(do cp \"D:\\cyan\\cyandm.com\\cyan\\public\\images\\placeholder.svg\" \"D:\\cyan\\cyandm.com\\cyan\\public\\images\\services\\ui-step-$i.jpg\")",
       "Bash(for i in 1 2 3)",
-      "Bash(do cp ../placeholder.svg \"ui-step-$i.jpg\")"
+      "Bash(do cp ../placeholder.svg \"ui-step-$i.jpg\")",
+      "Bash(pnpm dev)",
+      "Bash(curl -s \"https://cyandm.com/web-develope/\" -o \"D:\\cyan\\cyandm.com\\wordpress-pages\\web-develope.html\")",
+      "Bash(curl -s \"https://cyandm.com/seo/\" -o \"D:\\cyan\\cyandm.com\\wordpress-pages\\seo.html\")",
+      "Bash(curl -s \"https://cyandm.com/branding/\" -o \"D:\\cyan\\cyandm.com\\wordpress-pages\\branding.html\")",
+      "Bash(curl -s \"https://cyandm.com/about-cyandm/\" -o \"D:\\cyan\\cyandm.com\\wordpress-pages\\about.html\")",
+      "Bash(curl -s \"https://cyandm.com/project/\" -o \"D:\\cyan\\cyandm.com\\wordpress-pages\\projects.html\")",
+      "Bash(curl -s \"https://cyandm.com/web-develope/\" -o wordpress-pages/web-develope.html)",
+      "Bash(curl -s \"https://cyandm.com/seo/\" -o wordpress-pages/seo.html)",
+      "Bash(curl -s \"https://cyandm.com/branding/\" -o wordpress-pages/branding.html)",
+      "Bash(curl:*)",
+      "Bash(curl -s \"https://cyandm.com/project/\" -o wordpress-pages/projects.html)"
     ],
     "deny": [],
     "ask": []

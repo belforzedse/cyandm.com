@@ -533,6 +533,17 @@ header .right-col {
   gap: 1rem;
 }
 
+#mobileMenuToggle {
+  display: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1280px) {
+  #mobileMenuToggle {
+    display: block;
+  }
+}
+
 header .right-col .mobile-menu-toggle {
   display: none;
   background: none;
@@ -906,6 +917,11 @@ header .left-col {
   border-radius: 50%;
   background: linear-gradient(hsl(0, 0%, 46%) 0 0) top/100% 0% no-repeat, radial-gradient(farthest-side, hsl(0, 0%, 46%) 95%, rgba(0, 0, 0, 0)) 50%/8px 8px no-repeat #fff;
   animation: l9 1s infinite ease-in;
+}
+
+.preloader-div.hide {
+  opacity: 0;
+  pointer-events: none;
 }
 
 @keyframes l9 {

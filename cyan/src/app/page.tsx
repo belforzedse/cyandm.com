@@ -19,8 +19,8 @@ import { homePage } from "../data/global";
 
 const planets = [
   { title: "خدمات سئو", href: "/seo", className: "red" },
-  { title: "طراحی وبسایت شخصی", href: "/ui-design", className: "yellow" },
-  { title: "همه خدمات", href: "/marketing", className: "cyan" },
+  { title: "طراحی وبسایت شخصی", href: "/web-develope", className: "yellow" },
+  { title: "همه خدمات", href: "/branding", className: "cyan" },
 ];
 
 const starIcons = Array.from({ length: 5 });
@@ -163,7 +163,7 @@ const usePreloaderAnimation = () => {
 };
 
 export default function Home() {
-  const { hero, projects, testimonials, brands, services, team, posts, faqs } = homePage;
+  const { hero, projects, testimonials, services, team, posts, faqs } = homePage;
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
   usePreloaderAnimation();
@@ -200,8 +200,8 @@ export default function Home() {
     <>
       <section className="mobile-header justify-center" style={{ backgroundImage: `url(${hero.backgroundImage})` }}>
         <div className="mobile-title">
-          <p>{hero.title}</p>
-          <Link href={hero.cta.href}>{hero.cta.label}</Link>
+          <p>از ایده تا اجرا همه را به ما بسپار</p>
+          <Link href="/services">مشاهده خدمات</Link>
         </div>
       </section>
 
@@ -255,7 +255,7 @@ export default function Home() {
       <main className="front-page">
         <section className="projects-con">
           <div className="section-title container">
-            <h2 className="h1">گوشه‌ای از پروژه‌های موفق سایان</h2>
+            <h2 className="h1">گوشه ای از پروژه‌های موفق سایان</h2>
             <Link href="/projects" className="primary-btn">
               مشاهده همه
             </Link>
@@ -305,7 +305,7 @@ export default function Home() {
 
         <section className="customer-con container">
           <div className="section-title">
-            <h2 className="h1">نظرات همراهان ما</h2>
+            <h2 className="h1"> نظرات همراهان ما</h2>
           </div>
           <Swiper
             className="customer-wrapper"
@@ -370,35 +370,6 @@ export default function Home() {
             {testimonials.map((testimonial, index) => (
               <SwiperSlide key={`thumb-${index}`}>
                 <img src={testimonial.logo} alt={testimonial.author} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </section>
-
-        <section className="container brands-con">
-          <h2 className="h1">برندهایی که افتخار همکاری باهاشون را داشتیم</h2>
-          <Swiper
-            id="brandsSwiper"
-            className="brands-wrapper"
-            modules={[Autoplay]}
-            slidesPerView={3}
-            spaceBetween={24}
-            autoplay
-            breakpoints={{
-              768: {
-                slidesPerView: 5,
-              },
-              1024: {
-                slidesPerView: 7,
-              },
-              1440: {
-                slidesPerView: 9,
-              },
-            }}
-          >
-            {brands.map((brand, index) => (
-              <SwiperSlide key={index} className="img-wrapper">
-                <img src={brand.logo} alt={brand.name} />
               </SwiperSlide>
             ))}
           </Swiper>

@@ -380,17 +380,45 @@ export function Header({
 
   return (
     <header ref={headerRef} className="container" style={headerStyle}>
-      <div className="right-col">
+      <i
+        id="mobileMenuToggle"
+        role="button"
+        tabIndex={0}
+        aria-expanded={mobileOpen}
+        aria-label={mobileToggleLabel}
+        onClick={() => setMobileOpen((prev) => !prev)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setMobileOpen((prev) => !prev);
+          }
+        }}
+      >
+        <MenuIcon />
+      </i>
+
+      <div
+        className="mobile-menu"
+        id="mobileMenu"
+        data-active={mobileOpen ? "true" : undefined}
+      >
         <button
           type="button"
-          className="mobile-menu-toggle"
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-menu"
-          onClick={() => setMobileOpen((prev) => !prev)}
+          className="primary-btn"
+          onClick={() => {
+            open("make-project");
+            setMobileOpen(false);
+          }}
         >
-          {mobileOpen ? <CloseIcon /> : <MenuIcon />}
-          <span className="sr-only">{mobileToggleLabel}</span>
+          یه پروژه بساز
         </button>
+
+        <div className="mobile-menu-nav">
+          <ul className="menu">{renderMobileTree(tree)}</ul>
+        </div>
+      </div>
+
+      <div className="right-col">
         <Link href="/" aria-label="لوگو">
           <Logo />
         </Link>
@@ -401,6 +429,7 @@ export function Header({
         <button
           type="button"
           className="primary-btn"
+          id="customize_button"
           onClick={() => open("make-project")}
         >
           یه پروژه بساز
@@ -413,33 +442,6 @@ export function Header({
             <i className="icon-call"></i>
           </a>
         )}
-      </div>
-      <div
-        className="mobile-menu"
-        id="mobile-menu"
-        data-active={mobileOpen ? "true" : undefined}
-      >
-        <div className="mobile-menu-actions">
-          <button
-            type="button"
-            className="primary-btn"
-            onClick={() => {
-              open("make-project");
-              setMobileOpen(false);
-            }}
-          >
-            یه پروژه بساز
-          </button>
-          {phoneNumber && (
-            <a href={`tel:${phoneNumber}`} className="phone-link">
-              <PhoneIcon className="icon-call" />
-              <span>{phoneNumber}</span>
-            </a>
-          )}
-        </div>
-        <nav className="mobile-menu-nav" aria-label="منوی اصلی موبایل">
-          <ul className="menu">{renderMobileTree(tree)}</ul>
-        </nav>
       </div>
     </header>
   );
