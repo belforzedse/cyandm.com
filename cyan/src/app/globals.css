@@ -1,102 +1,37 @@
 @import "tailwindcss";
 
-@layer base {
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-
-  :root {
-    color-scheme: dark;
-    --background: #080519;
-    --background-muted: #0f0b26;
-    --surface: rgba(18, 16, 40, 0.8);
-    --surface-muted: rgba(32, 29, 52, 0.66);
-    --surface-strong: rgba(255, 255, 255, 0.08);
-    --primary: #15eded;
-    --primary-strong: #04b2e9;
-    --accent: #f5a623;
-    --danger: #ff4d4f;
-    --text: #f7f9fb;
-    --text-muted: rgba(247, 249, 251, 0.72);
-    --border: rgba(255, 255, 255, 0.08);
-    --radius-md: 1.5rem;
-    --radius-lg: 2.5rem;
-    --grid-max: 1280px;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    margin: 0;
-    min-height: 100%;
-    background-color: var(--background);
-    color: var(--text);
-    font-family: var(--font-peyda), system-ui, -apple-system, BlinkMacSystemFont,
-      "Segoe UI", sans-serif;
-    font-feature-settings: "ss01" 1, "salt" 0;
-    letter-spacing: 0.5px;
-  }
-
-  ul,
-  ol {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  img,
-  picture,
-  video,
-  canvas,
-  svg {
-    display: block;
-    max-width: 100%;
-    height: auto;
-  }
-
-  button,
-  input,
-  textarea,
-  select {
-    font: inherit;
-    color: inherit;
-  }
+:root {
+  color-scheme: dark;
+  --background: #080519;
+  --background-muted: #0f0b26;
+  --surface: rgba(18, 16, 40, 0.8);
+  --surface-muted: rgba(32, 29, 52, 0.66);
+  --surface-strong: rgba(255, 255, 255, 0.08);
+  --primary: #15eded;
+  --primary-strong: #04b2e9;
+  --accent: #f5a623;
+  --danger: #ff4d4f;
+  --text: #f7f9fb;
+  --text-muted: rgba(247, 249, 251, 0.72);
+  --border: rgba(255, 255, 255, 0.08);
+  --radius-md: 1.5rem;
+  --radius-lg: 2.5rem;
+  --grid-max: 1280px;
 }
 
-@keyframes eye-blink {
-  0%,
-  20%,
-  100% {
-    background-size: 100% 0%, 8px 8px;
-    background-position: top, 50% 50%;
-  }
-  25% {
-    background-size: 100% 50%, 8px 8px;
-    background-position: top, 50% 60%;
-  }
-  30% {
-    background-size: 100% 100%, 8px 8px;
-    background-position: top, 50% 70%;
-  }
-  35% {
-    background-size: 100% 50%, 8px 8px;
-    background-position: top, 50% 60%;
-  }
-  40% {
-    background-size: 100% 0%, 8px 8px;
-    background-position: top, 50% 50%;
-  }
+/* All WordPress styles are in wordpress-layout.css */
+/* Tailwind utilities are still available but WordPress CSS takes precedence */
+
+html {
+  scroll-behavior: smooth;
 }
 
+/* Scroll down component minimal styles */
+.scroll-down:hover i {
+  transform: translateY(0.5rem);
+}
+
+/* Animations from WordPress compiled.css */
 @keyframes floating {
   from {
     translate: 0 -70%;
