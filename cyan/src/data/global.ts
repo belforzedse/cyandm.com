@@ -67,10 +67,10 @@ export const projects: Project[] = [
     title: "پلتفرم بانکی آذران",
     excerpt:
       "طراحی و توسعه تجربه کاربری برای بانکداری دیجیتال با تمرکز بر سادگی و اعتماد.",
-    coverImage: "/wp-assets/imgs/projects/project-1.jpg",
-    archiveImage: "/wp-assets/imgs/projects/project-1.jpg",
-    backgroundImageDesktop: "/wp-assets/imgs/projects/project-1.jpg",
-    backgroundImageMobile: "/wp-assets/imgs/projects/project-1.jpg",
+    coverImage: "/images/projects/project-1.jpg",
+    archiveImage: "/images/projects/project-1.jpg",
+    backgroundImageDesktop: "/images/projects/project-1.jpg",
+    backgroundImageMobile: "/images/projects/project-1.jpg",
     accentColor: "#15EDED",
     categories: ["web", "branding"],
     industries: ["فین‌تک", "بانکداری"],
@@ -89,10 +89,10 @@ export const projects: Project[] = [
     title: "سایان کامرس",
     excerpt:
       "یک تجربه خرید امن و شخصی‌سازی شده برای برندهای لوکس ایرانی.",
-    coverImage: "/wp-assets/imgs/projects/project-2.jpg",
-    archiveImage: "/wp-assets/imgs/projects/project-2.jpg",
-    backgroundImageDesktop: "/wp-assets/imgs/projects/project-2.jpg",
-    backgroundImageMobile: "/wp-assets/imgs/projects/project-2.jpg",
+    coverImage: "/images/projects/project-2.jpg",
+    archiveImage: "/images/projects/project-2.jpg",
+    backgroundImageDesktop: "/images/projects/project-2.jpg",
+    backgroundImageMobile: "/images/projects/project-2.jpg",
     accentColor: "#04B2E9",
     categories: ["web", "branding"],
     industries: ["ای-کامرس", "لوکس"],
@@ -111,10 +111,10 @@ export const projects: Project[] = [
     title: "سوپر اپ تجارت",
     excerpt:
       "همکاری استراتژیک برای بازطراحی سوپر اپ و بهبود قیف ثبت‌نام.",
-    coverImage: "/wp-assets/imgs/projects/project-3.jpg",
-    archiveImage: "/wp-assets/imgs/projects/project-3.jpg",
-    backgroundImageDesktop: "/wp-assets/imgs/projects/project-3.jpg",
-    backgroundImageMobile: "/wp-assets/imgs/projects/project-3.jpg",
+    coverImage: "/images/projects/project-3.jpg",
+    archiveImage: "/images/projects/project-3.jpg",
+    backgroundImageDesktop: "/images/projects/project-3.jpg",
+    backgroundImageMobile: "/images/projects/project-3.jpg",
     accentColor: "#9333EA",
     categories: ["app", "branding"],
     industries: ["اپلیکیشن", "بانکداری"],
@@ -138,7 +138,7 @@ export const services: Service[] = [
     title: "طراحی UI",
     description:
       "طراحی رابط‌های دیجیتال انسانی و دقیق برای افزایش نرخ تبدیل و رضایت کاربر.",
-    heroImage: "/wp-assets/imgs/services/ui-design-hero.jpg",
+    heroImage: "/images/services/ui-design-hero.jpg",
     ballFirstColor: "#ff6b6b",
     ballSecondColor: "#ee5a6f",
     highlights: [
@@ -168,7 +168,7 @@ export const services: Service[] = [
     title: "مارکتینگ دیجیتال",
     description:
       "استراتژی‌های رشد محور شامل کمپین، اتوماسیون و تحلیل داده.",
-    heroImage: "/wp-assets/imgs/services/marketing-hero.jpg",
+    heroImage: "/images/services/marketing-hero.jpg",
     ballFirstColor: "#4ecdc4",
     ballSecondColor: "#44a3f7",
     highlights: [
@@ -196,7 +196,7 @@ export const services: Service[] = [
     slug: "seo",
     title: "سئو و بهینه‌سازی",
     description: "بهبود جایگاه ارگانیک با استراتژی سئو تکنیکال و محتوایی.",
-    heroImage: "/wp-assets/imgs/services/seo-hero.jpg",
+    heroImage: "/images/services/seo-hero.jpg",
     ballFirstColor: "#ffd93d",
     ballSecondColor: "#ff9a3d",
     highlights: [
@@ -228,7 +228,7 @@ export const blogPosts: BlogPost[] = [
     title: "پایه‌های طراحی رشد محور",
     excerpt:
       "چگونه تیم طراحی و مارکتینگ می‌توانند برای ایجاد تجربه‌های درآمدزا هم‌افزا شوند.",
-    coverImage: "/wp-assets/imgs/blog/blog-1.jpg",
+    coverImage: "/images/blog/blog-1.jpg",
     categories: ["طراحی", "رشد"],
     publishedAt: "2024-09-01",
     author: "تیم محتوا",
@@ -241,7 +241,7 @@ export const blogPosts: BlogPost[] = [
     slug: "headless-wordpress-stack",
     title: "راه‌اندازی وردپرس هدلس برای سازمان‌های چابک",
     excerpt: "معماری، ابزارها و روال‌های انتشار در پیاده‌سازی headless.",
-    coverImage: "/wp-assets/imgs/blog/blog-2.jpg",
+    coverImage: "/images/blog/blog-2.jpg",
     categories: ["توسعه", "WordPress"],
     publishedAt: "2024-08-10",
     author: "واحد فنی",
@@ -254,7 +254,7 @@ export const blogPosts: BlogPost[] = [
     slug: "product-analytics-playbook",
     title: "دفترچه تحلیل محصول",
     excerpt: "متریک‌های کلیدی برای پایش عملکرد محصول دیجیتال.",
-    coverImage: "/wp-assets/imgs/blog/blog-3.jpg",
+    coverImage: "/images/blog/blog-3.jpg",
     categories: ["تحلیل", "محصول"],
     publishedAt: "2024-07-22",
     author: "تیم دیتا",
@@ -289,27 +289,27 @@ export const testimonials: Testimonial[] = [
     role: "مدیر بازاریابی، آذران",
     quote:
       "همکاری با سایان باعث شد فرآیند جذب مشتری دیجیتال ما سرعت بگیرد.",
-    logo: "/wp-assets/imgs/brands/brand-1.svg",
+    logo: "/images/brands/brand-1.svg",
   },
   {
     author: "سمیه توکلی",
     role: "مدیر محصول، ابرپرداز",
     quote: "تیم سایان فراتر از انتظار ما در طراحی سیستم دیزاین ظاهر شد.",
-    logo: "/wp-assets/imgs/brands/brand-2.svg",
+    logo: "/images/brands/brand-2.svg",
   },
   {
     author: "پویان لطفی",
     role: "CEO، تک‌رشد",
     quote: "داده‌محوری و اجرای دقیق، دو نقطه قوت اصلی تیم بود.",
-    logo: "/wp-assets/imgs/brands/brand-3.svg",
+    logo: "/images/brands/brand-3.svg",
   },
 ];
 
 export const brands: Array<{ name: string; logo: string }> = [
-  { name: "آذران", logo: "/wp-assets/imgs/brands/brand-1.svg" },
-  { name: "ابرپرداز", logo: "/wp-assets/imgs/brands/brand-2.svg" },
-  { name: "تجارت", logo: "/wp-assets/imgs/brands/brand-3.svg" },
-  { name: "تک‌رشد", logo: "/wp-assets/imgs/brands/brand-4.svg" },
+  { name: "آذران", logo: "/images/brands/brand-1.svg" },
+  { name: "ابرپرداز", logo: "/images/brands/brand-2.svg" },
+  { name: "تجارت", logo: "/images/brands/brand-3.svg" },
+  { name: "تک‌رشد", logo: "/images/brands/brand-4.svg" },
 ];
 
 export const teamMembers: TeamMember[] = [
@@ -318,7 +318,7 @@ export const teamMembers: TeamMember[] = [
     name: "مهدی بهرامی",
     role: "رهبر تیم طراحی",
     bio: "بر روی تجربه‌های بانکی و فین‌تک تمرکز دارد.",
-    avatar: "/wp-assets/imgs/team/member-1.jpg",
+    avatar: "/images/team/member-1.jpg",
     socials: [
       { label: "LinkedIn", url: "https://linkedin.com" },
       { label: "Dribbble", url: "https://dribbble.com" },
@@ -329,7 +329,7 @@ export const teamMembers: TeamMember[] = [
     name: "سمیه توکلی",
     role: "استراتژیست بازاریابی",
     bio: "روی قیف‌های رشد و اتوماسیون تمرکز دارد.",
-    avatar: "/wp-assets/imgs/team/member-2.jpg",
+    avatar: "/images/team/member-2.jpg",
     socials: [{ label: "LinkedIn", url: "https://linkedin.com" }],
   },
   {
@@ -337,7 +337,7 @@ export const teamMembers: TeamMember[] = [
     name: "پویان لطفی",
     role: "تحلیل‌گر ارشد داده",
     bio: "متخصص طراحی داشبورد و تحلیل رویدادها.",
-    avatar: "/wp-assets/imgs/team/member-3.jpg",
+    avatar: "/images/team/member-3.jpg",
     socials: [{ label: "LinkedIn", url: "https://linkedin.com" }],
   },
 ];
@@ -375,20 +375,20 @@ export const contact: ContactDetails = {
     {
       label: "اینستاگرام",
       url: "https://instagram.com/cyandm",
-      logo: "/wp-assets/imgs/socials/instagram.svg",
+      logo: "/images/socials/instagram.svg",
     },
     {
       label: "لینکدین",
       url: "https://linkedin.com/company/cyandm",
-      logo: "/wp-assets/imgs/socials/linkedin.svg",
+      logo: "/images/socials/linkedin.svg",
     },
     {
       label: "تلگرام",
       url: "https://t.me/cyandm",
-      logo: "/wp-assets/imgs/socials/telegram.svg",
+      logo: "/images/socials/telegram.svg",
     },
   ],
-  footerImage: "/wp-assets/imgs/puzzle-image.png",
+  footerImage: "/images/puzzle-image.png",
 };
 
 export const homePage: HomePageContent = {
@@ -399,7 +399,7 @@ export const homePage: HomePageContent = {
       "در وردپرس، این متن از فیلد `mobile_hero_title` و `mobile_hero_description` صفحه اصلی خوانده می‌شود. در اینجا داده ثابت است.",
     cta: { label: "شروع پروژه", href: "/contact" },
     secondaryCta: { label: "مشاهده پروژه‌ها", href: "/projects" },
-    backgroundImage: "/wp-assets/imgs/hero/mobile-hero.jpg",
+    backgroundImage: "/images/hero/mobile-hero.jpg",
   },
   metrics: [
     { label: "پروژه موفق", value: "+120" },
@@ -424,7 +424,7 @@ export const aboutSlides: LandingPageSection[] = [
       "داده‌های این اسلاید در وردپرس از فیلد `about_us_section > mission` تأمین می‌شود. در دمو متن ثابت دارد.",
     media: {
       type: "image",
-      src: "/wp-assets/imgs/about/mission.jpg",
+      src: "/images/about/mission.jpg",
       alt: "ماموریت سایان",
     },
   },
@@ -436,7 +436,7 @@ export const aboutSlides: LandingPageSection[] = [
       "چشم‌انداز ما خلق تجربه‌هایی است که رشد پایدار را تضمین کند.",
     media: {
       type: "image",
-      src: "/wp-assets/imgs/about/vision.jpg",
+      src: "/images/about/vision.jpg",
       alt: "چشم‌انداز",
     },
     bullets: [
@@ -483,7 +483,7 @@ export const landingSections: Record<string, LandingPageSection[]> = {
       description: "داشبوردهای زنده برای تصمیم‌گیری سریع.",
       media: {
         type: "image",
-        src: "/wp-assets/imgs/landing/marketing-analytics.jpg",
+        src: "/images/landing/marketing-analytics.jpg",
         alt: "داشبورد مارکتینگ",
       },
     },

@@ -36,7 +36,7 @@ export default function ServicesPage() {
             <span className="grey" />
           </div>
         </div>
-        <img src="/wp-assets/imgs/service.png" alt="خدمات سایان" />
+        <img src="/images/service.png" alt="خدمات سایان" />
         <div className="flex flex-col justify-center items-center gap-4 text-center">
           <h1 className="h1">خدمات سایان</h1>
           <p className="h5">مشاهده خدمات</p>

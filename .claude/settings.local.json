@@ -6,7 +6,17 @@
       "Bash(npm run dev:*)",
       "Bash(curl -s \"https://cyandm.com\")",
       "Bash(curl -s \"https://cyandm.com\" -o \"D:\\cyan\\cyandm.com\\wordpress-homepage.html\")",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(mkdir:*)",
+      "Bash(for i in {1..3})",
+      "Bash(do cp placeholder.svg \"projects/project-$i.jpg\")",
+      "Bash(done)",
+      "Bash(do cp placeholder.svg \"blog/blog-$i.jpg\")",
+      "Bash(do cp placeholder.svg \"team/member-$i.jpg\")",
+      "Bash(for i in 1 2 3 4 5)",
+      "Bash(do cp \"D:\\cyan\\cyandm.com\\cyan\\public\\images\\placeholder.svg\" \"D:\\cyan\\cyandm.com\\cyan\\public\\images\\services\\ui-step-$i.jpg\")",
+      "Bash(for i in 1 2 3)",
+      "Bash(do cp ../placeholder.svg \"ui-step-$i.jpg\")"
     ],
     "deny": [],
     "ask": []

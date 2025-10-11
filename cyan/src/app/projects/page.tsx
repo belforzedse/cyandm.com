@@ -50,7 +50,7 @@ export default function ProjectsPage() {
 
       <section className="flex flex-col justify-center items-center">
         <Bubbles variant="projects" />
-        <img src="/wp-assets/imgs/project.png" alt="Projects" />
+        <img src="/images/project.png" alt="Projects" />
         <div className="flex flex-col justify-center items-center gap-4">
           <h1 className="h1">پروژه سایان</h1>
           <p className="h5">بزن بریم</p>

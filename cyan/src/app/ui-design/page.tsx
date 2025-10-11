@@ -26,27 +26,27 @@ const workSteps = [
   {
     title: "تحقیقات کاربر",
     description: "مصاحبه، نقشه سفر و تحلیل رقبا برای فهم عمیق نیاز کاربر.",
-    image: "/wp-assets/imgs/services/ui-step-1.jpg",
+    image: "/images/services/ui-step-1.jpg",
   },
   {
     title: "طراحی تجربه",
     description: "طراحی فلوها، وایرفریم و تست سناریوهای کلیدی.",
-    image: "/wp-assets/imgs/services/ui-step-2.jpg",
+    image: "/images/services/ui-step-2.jpg",
   },
   {
     title: "پروتوتایپ و تست",
     description: "نمونه‌های تعاملی و تست با کاربران واقعی برای کاهش ریسک.",
-    image: "/wp-assets/imgs/services/ui-step-3.jpg",
+    image: "/images/services/ui-step-3.jpg",
   },
   {
     title: "سیستم طراحی",
     description: "ساخت کتابخانهٔ اجزای مقیاس‌پذیر و مستندسازی برای تیم توسعه.",
-    image: "/wp-assets/imgs/services/ui-step-4.jpg",
+    image: "/images/services/ui-step-4.jpg",
   },
   {
     title: "تحویل و پشتیبانی",
     description: "همراهی تا مرحله توسعه و نظارت بر اجرای دقیق جزئیات.",
-    image: "/wp-assets/imgs/services/ui-step-5.jpg",
+    image: "/images/services/ui-step-5.jpg",
   },
 ];
 
@@ -127,7 +127,7 @@ export default function UIDesignPage() {
         <ServiceFAQSlide
           title="پرسش‌های پرتکرار مشتریان طراحی UI"
           faqs={faqs}
-          accentImage="/wp-assets/imgs/services/ui-faq.jpg"
+          accentImage="/images/services/ui-faq.jpg"
         />
 
         <ServiceContactSlide

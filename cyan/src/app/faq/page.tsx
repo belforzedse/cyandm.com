@@ -25,8 +25,8 @@ export default function FAQPage() {
 
       <div className="container grid grid-flow-row-dense grid-cols-8 grid-rows-8 gap-4 justify-center align-middle [&_img]:min-w-[200px]">
         <div>
-          <img src="/wp-assets/imgs/faq.png" alt="" />
-          <img src="/wp-assets/imgs/faq.png" alt="" />
+          <img src="/images/faq.png" alt="" />
+          <img src="/images/faq.png" alt="" />
         </div>
 
         <div className="col-span-6">
@@ -68,8 +68,8 @@ export default function FAQPage() {
         </div>
 
         <div>
-          <img src="/wp-assets/imgs/faq.png" alt="" />
-          <img src="/wp-assets/imgs/faq.png" alt="" />
+          <img src="/images/faq.png" alt="" />
+          <img src="/images/faq.png" alt="" />
         </div>
       </div>
     </>

@@ -111,7 +111,7 @@ export default function AboutPage() {
             <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(255,165,0,0.12),transparent_70%)]" aria-hidden />
             <div className="container flex flex-col items-center gap-6 text-center">
               <img
-                src="/wp-assets/imgs/puzzle-image.png"
+                src="/images/puzzle-image.png"
                 alt="پازل همکاری"
                 className="h-48 w-auto object-contain"
               />
@@ -148,7 +148,7 @@ export default function AboutPage() {
             <Bubbles variant="violet" />
             <div className="relative z-10 w-full max-w-3xl overflow-hidden rounded-[var(--radius-lg)] border border-[color:var(--border)] bg-[color:var(--surface)]/70 shadow-[0_50px_120px_rgba(12,10,32,0.5)]">
               <div className="aspect-video w-full overflow-hidden">
-                <img src="/wp-assets/imgs/projects/project-3.jpg" alt="کالبدشکافی پروژه" className="h-full w-full object-cover" />
+                <img src="/images/projects/project-3.jpg" alt="کالبدشکافی پروژه" className="h-full w-full object-cover" />
               </div>
               <div className="flex items-center justify-between px-6 py-5 text-sm text-[color:var(--text-muted)]">
                 <span>آماده‌ایم پروژه بعدی‌ت رو بسازیم</span>

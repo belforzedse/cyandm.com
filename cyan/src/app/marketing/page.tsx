@@ -26,27 +26,27 @@ const workSteps = [
   {
     title: "تحلیل و استراتژی",
     description: "بررسی دقیق بازار، رقبا و شناخت نقطهٔ تمایز برند تو.",
-    image: "/wp-assets/imgs/services/marketing-step-1.jpg",
+    image: "/images/services/marketing-step-1.jpg",
   },
   {
     title: "برنامه‌ریزی کمپین",
     description: "چینش قیف بازاریابی و طرح رسانه‌ای روی کانال‌های پر بازده.",
-    image: "/wp-assets/imgs/services/marketing-step-2.jpg",
+    image: "/images/services/marketing-step-2.jpg",
   },
   {
     title: "تولید محتوا",
     description: "ساخت محتوای تاثیرگذار متناسب با پرسونای مخاطب.",
-    image: "/wp-assets/imgs/services/marketing-step-3.jpg",
+    image: "/images/services/marketing-step-3.jpg",
   },
   {
     title: "اجرا و مانیتورینگ",
     description: "پیاده‌سازی کمپین و پایش لحظه‌ای برای بهبود نرخ تبدیل.",
-    image: "/wp-assets/imgs/services/marketing-step-4.jpg",
+    image: "/images/services/marketing-step-4.jpg",
   },
   {
     title: "گزارش‌گیری و رشد پیوسته",
     description: "دریافت داشبوردهای شفاف و مسیر بهبود برای دوره بعدی.",
-    image: "/wp-assets/imgs/services/marketing-step-5.jpg",
+    image: "/images/services/marketing-step-5.jpg",
   },
 ];
 
@@ -132,7 +132,7 @@ export default function MarketingPage() {
         <ServiceFAQSlide
           title="پرسش‌های پرتکرار همکاری‌های مارکتینگ"
           faqs={faqs}
-          accentImage="/wp-assets/imgs/services/marketing-faq.jpg"
+          accentImage="/images/services/marketing-faq.jpg"
         />
 
         <ServiceContactSlide

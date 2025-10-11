@@ -26,27 +26,27 @@ const workSteps = [
   {
     title: "تحلیل تکنیکال",
     description: "بررسی کامل وضعیت فنی سایت و شناسایی موانع رشد ارگانیک.",
-    image: "/wp-assets/imgs/services/seo-step-1.jpg",
+    image: "/images/services/seo-step-1.jpg",
   },
   {
     title: "تحقیق کلمات کلیدی",
     description: "شناخت دقیق نیاز مخاطب و ساخت نقشهٔ کلمات هوشمند.",
-    image: "/wp-assets/imgs/services/seo-step-2.jpg",
+    image: "/images/services/seo-step-2.jpg",
   },
   {
     title: "بهینه‌سازی محتوا",
     description: "تدوین ساختار محتوا، بهبود صفحات کلیدی و تولید محتوای تازه.",
-    image: "/wp-assets/imgs/services/seo-step-3.jpg",
+    image: "/images/services/seo-step-3.jpg",
   },
   {
     title: "لینک‌سازی هدفمند",
     description: "ساخت پروفایل لینک سالم و مانیتورینگ اعتبارات دامنه.",
-    image: "/wp-assets/imgs/services/seo-step-4.jpg",
+    image: "/images/services/seo-step-4.jpg",
   },
   {
     title: "گزارش و مانیتورینگ",
     description: "گزارش‌دهی شفاف با داشبورد لحظه‌ای و تحلیل مسیر رشد.",
-    image: "/wp-assets/imgs/services/seo-step-5.jpg",
+    image: "/images/services/seo-step-5.jpg",
   },
 ];
 
@@ -127,7 +127,7 @@ export default function SEOPage() {
         <ServiceFAQSlide
           title="سوالاتی که قبل از همکاری در سئو می‌پرسند"
           faqs={faqs}
-          accentImage="/wp-assets/imgs/services/seo-faq.jpg"
+          accentImage="/images/services/seo-faq.jpg"
         />
 
         <ServiceContactSlide

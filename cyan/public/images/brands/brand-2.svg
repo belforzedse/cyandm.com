@@ -1,0 +1,5 @@
+<!-- TODO: Replace with actual brand logo -->
+<svg width="120" height="60" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="60" fill="#f1f5f9"/>
+  <text x="60" y="35" font-family="Arial" font-size="16" fill="#64748b" text-anchor="middle">Brand 2</text>
+</svg>
