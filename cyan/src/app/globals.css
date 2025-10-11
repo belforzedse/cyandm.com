@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "./wordpress-layout.css";
 
 :root {
   color-scheme: dark;
@@ -90,126 +89,212 @@ html {
   }
 }
 
-.bubble-layer {
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
+@layer components {
+  #preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: hsl(227, 44%, 6%);
+    transition: opacity 0.8s ease-in-out;
+  }
 
-.bubble-particle {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(0);
-  opacity: 0.2;
-  animation: bubble-float var(--bubble-duration, 14s) ease-in-out infinite;
-  box-shadow: 0 0 40px rgba(21, 237, 237, 0.25);
-}
+  #preloader.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
 
-.bubble-particle::after {
-  content: "";
-  position: absolute;
-  inset: 15%;
-  border-radius: 9999px;
-  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), transparent 70%);
-}
+  .loader-eye {
+    height: 30px;
+    width: 30px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+      linear-gradient(#4b5563 0 0) top/100% 0% no-repeat,
+      radial-gradient(farthest-side, #4b5563 95%, #0000) 50% 50%/8px 8px no-repeat #fff;
+    animation: eye-blink 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-/* Bottom Fire - copied from WordPress compiled.css lines 72-167 */
-.bottom-fire {
-  min-height: 12.5rem;
-  width: 100%;
-  position: fixed;
-  bottom: -6.5rem;
-  animation: bottom_fire_container 10s ease-in-out infinite alternate;
-  z-index: 444444;
-  transition: opacity 0.3s ease;
-  opacity: 1;
-  pointer-events: none;
-}
+  .scroll-down:hover i {
+    transform: translateY(0.5rem);
+  }
 
-@media screen and (max-width: 768px) {
+  .bubble-layer {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .bubble-particle {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(0);
+    opacity: 0.2;
+    animation: bubble-float var(--bubble-duration, 14s) ease-in-out infinite;
+    box-shadow: 0 0 40px rgba(21, 237, 237, 0.25);
+  }
+
+  .bubble-particle::after {
+    content: "";
+    position: absolute;
+    inset: 15%;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), transparent 70%);
+  }
+
   .bottom-fire {
-    bottom: -1rem;
+    min-height: 12.5rem;
+    width: 100%;
+    position: fixed;
+    bottom: -6.5rem;
+    animation: bottom_fire_container 10s ease-in-out infinite alternate;
+    z-index: 444444;
+    transition: opacity 0.3s ease;
+    opacity: 1;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    .bottom-fire {
+      bottom: -1rem;
+    }
+  }
+
+  .bottom-fire .circle {
+    --width: 240px;
+    --left: 120px;
+    --top: 0;
+    --hue: 240;
+    --saturate: 72%;
+    --lightness: 64%;
+    --alpha: 1;
+    width: var(--width);
+    top: var(--top);
+    left: var(--left);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    position: absolute;
+    filter: blur(100px);
+    background-color: hsla(var(--hue), var(--saturate), var(--lightness), var(--alpha));
+    animation: bottom_fire_circle 1s ease-in-out infinite alternate;
+  }
+
+  .bottom-fire .circle:nth-child(1) {
+    animation-delay: 0.3s;
+  }
+  .bottom-fire .circle:nth-child(2) {
+    animation-delay: 0.6s;
+  }
+  .bottom-fire .circle:nth-child(3) {
+    animation-delay: 0.9s;
+  }
+  .bottom-fire .circle:nth-child(4) {
+    animation-delay: 1.2s;
+  }
+  .bottom-fire .circle:nth-child(5) {
+    animation-delay: 1.5s;
+  }
+  .bottom-fire .circle:nth-child(6) {
+    animation-delay: 1.8s;
+  }
+  .bottom-fire .circle:nth-child(7) {
+    animation-delay: 2.1s;
+  }
+  .bottom-fire .circle:nth-child(8) {
+    animation-delay: 2.4s;
+  }
+  .bottom-fire .circle:nth-child(9) {
+    animation-delay: 2.7s;
+  }
+  .bottom-fire .circle:nth-child(10) {
+    animation-delay: 3s;
+  }
+  .bottom-fire .circle:nth-child(11) {
+    animation-delay: 3.3s;
+  }
+  .bottom-fire .circle:nth-child(12) {
+    animation-delay: 3.6s;
+  }
+  .bottom-fire .circle:nth-child(13) {
+    animation-delay: 3.9s;
+  }
+  .bottom-fire .circle:nth-child(14) {
+    animation-delay: 4.2s;
+  }
+  .bottom-fire .circle:nth-child(15) {
+    animation-delay: 4.5s;
+  }
+  .bottom-fire .circle:nth-child(16) {
+    animation-delay: 4.8s;
+  }
+  .bottom-fire .circle:nth-child(17) {
+    animation-delay: 5.1s;
+  }
+  .bottom-fire .circle:nth-child(18) {
+    animation-delay: 5.4s;
+  }
+  .bottom-fire .circle:nth-child(19) {
+    animation-delay: 5.7s;
+  }
+
+  body[data-scrolled="true"] .bottom-fire {
+    opacity: 0;
+    height: 10px;
+    min-height: 0;
+  }
+
+  .mini-bubble {
+    background: linear-gradient(var(--start-color), var(--end-color));
+    position: absolute;
+    width: 0.25rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    animation: floating 2s linear infinite alternate;
+  }
+
+  .mini-bubble:nth-child(0) {
+    animation-delay: 0s;
+  }
+  .mini-bubble:nth-child(1) {
+    animation-delay: 0.4s;
+  }
+  .mini-bubble:nth-child(2) {
+    animation-delay: 0.8s;
+  }
+  .mini-bubble:nth-child(3) {
+    animation-delay: 1.2s;
+  }
+  .mini-bubble:nth-child(4) {
+    animation-delay: 1.6s;
+  }
+  .mini-bubble:nth-child(5) {
+    animation-delay: 2s;
+  }
+  .mini-bubble:nth-child(6) {
+    animation-delay: 2.4s;
+  }
+  .mini-bubble:nth-child(7) {
+    animation-delay: 2.8s;
+  }
+  .mini-bubble:nth-child(8) {
+    animation-delay: 3.2s;
+  }
+  .mini-bubble:nth-child(9) {
+    animation-delay: 3.6s;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 }
-
-.bottom-fire .circle {
-  --width: 240px;
-  --left: 120px;
-  --top: 0;
-  --hue: 240;
-  --saturate: 72%;
-  --lightness: 64%;
-  --alpha: 1;
-  width: var(--width);
-  top: var(--top);
-  left: var(--left);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  position: absolute;
-  filter: blur(100px);
-  background-color: hsla(var(--hue), var(--saturate), var(--lightness), var(--alpha));
-  animation: bottom_fire_circle 1s ease-in-out infinite alternate;
-}
-
-.bottom-fire .circle:nth-child(1) { animation-delay: 0.3s; }
-.bottom-fire .circle:nth-child(2) { animation-delay: 0.6s; }
-.bottom-fire .circle:nth-child(3) { animation-delay: 0.9s; }
-.bottom-fire .circle:nth-child(4) { animation-delay: 1.2s; }
-.bottom-fire .circle:nth-child(5) { animation-delay: 1.5s; }
-.bottom-fire .circle:nth-child(6) { animation-delay: 1.8s; }
-.bottom-fire .circle:nth-child(7) { animation-delay: 2.1s; }
-.bottom-fire .circle:nth-child(8) { animation-delay: 2.4s; }
-.bottom-fire .circle:nth-child(9) { animation-delay: 2.7s; }
-.bottom-fire .circle:nth-child(10) { animation-delay: 3s; }
-.bottom-fire .circle:nth-child(11) { animation-delay: 3.3s; }
-.bottom-fire .circle:nth-child(12) { animation-delay: 3.6s; }
-.bottom-fire .circle:nth-child(13) { animation-delay: 3.9s; }
-.bottom-fire .circle:nth-child(14) { animation-delay: 4.2s; }
-.bottom-fire .circle:nth-child(15) { animation-delay: 4.5s; }
-.bottom-fire .circle:nth-child(16) { animation-delay: 4.8s; }
-.bottom-fire .circle:nth-child(17) { animation-delay: 5.1s; }
-.bottom-fire .circle:nth-child(18) { animation-delay: 5.4s; }
-.bottom-fire .circle:nth-child(19) { animation-delay: 5.7s; }
-
-body[data-scrolled="true"] .bottom-fire {
-  opacity: 0;
-  height: 10px;
-  min-height: 0;
-}
-
-/* Mini bubbles - copied from WordPress compiled.css lines 415-452 */
-.mini-bubble {
-  background: linear-gradient(var(--start-color), var(--end-color));
-  position: absolute;
-  width: 0.25rem;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  animation: floating 2s linear infinite alternate;
-}
-
-.mini-bubble:nth-child(0) { animation-delay: 0s; }
-.mini-bubble:nth-child(1) { animation-delay: 0.4s; }
-.mini-bubble:nth-child(2) { animation-delay: 0.8s; }
-.mini-bubble:nth-child(3) { animation-delay: 1.2s; }
-.mini-bubble:nth-child(4) { animation-delay: 1.6s; }
-.mini-bubble:nth-child(5) { animation-delay: 2s; }
-.mini-bubble:nth-child(6) { animation-delay: 2.4s; }
-.mini-bubble:nth-child(7) { animation-delay: 2.8s; }
-.mini-bubble:nth-child(8) { animation-delay: 3.2s; }
-.mini-bubble:nth-child(9) { animation-delay: 3.6s; }
-
-/* Accessibility helpers */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* All header and component styles are now in wordpress-layout.css */
