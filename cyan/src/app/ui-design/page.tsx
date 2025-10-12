@@ -54,7 +54,7 @@ const service = services.find((item) => item.slug === "ui-design");
 
 export default function UIDesignPage() {
   const { open } = useModal();
-  const swiperRef = useRef<SwiperType>();
+  const swiperRef = useRef<SwiperType | null>(null);
 
   const goToSlide = (index: number) => {
     if (swiperRef.current) {
